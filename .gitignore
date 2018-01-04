@@ -286,3 +286,10 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+/ProdFloor/Models/City.cs
+/ProdFloor/Models/State.cs
+/ProdFloor/Models/LandingSystem.cs
+/ProdFloor/Models/JobType.cs
+/ProdFloor/Models/FireCode.cs
+/ProdFloor/Models/DoorOperator.cs
+/ProdFloor/Models/Country.cs

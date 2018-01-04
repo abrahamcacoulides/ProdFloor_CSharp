@@ -35,26 +35,55 @@ namespace ProdFloor.Infrastructure
         public string PageClassNormal { get; set; }
         public string PageClassSelected { get; set; }
 
+        public bool DashBoardEnabled { get; set; } = false;
+        public PagingInfo AdditionalPageModel { get; set; }
+        public string MainUrlValue { get; set; }
+        public string AddUrlValue { get; set; }
+
         public override void Process(TagHelperContext context,
         TagHelperOutput output)
         {
-            IUrlHelper urlHelper = urlHelperFactory.GetUrlHelper(ViewContext);
-            TagBuilder result = new TagBuilder("div");
-            for (int i = 1; i <= PageModel.TotalPages; i++)
+            if (DashBoardEnabled)
             {
-                TagBuilder tag = new TagBuilder("a");
-                PageUrlValues["jobPage"] = i;
-                tag.Attributes["href"] = urlHelper.Action(PageAction, PageUrlValues);
-                if (PageClassesEnabled)
+                IUrlHelper urlHelper = urlHelperFactory.GetUrlHelper(ViewContext);
+                TagBuilder result = new TagBuilder("div");
+                for (int i = 1; i <= PageModel.TotalPages; i++)
                 {
-                    tag.AddCssClass(PageClass);
-                    tag.AddCssClass(i == PageModel.CurrentPage
-                    ? PageClassSelected : PageClassNormal);
+                    TagBuilder tag = new TagBuilder("a");
+                    PageUrlValues[MainUrlValue] = i;
+                    PageUrlValues[AddUrlValue] = AdditionalPageModel.CurrentPage;
+                    tag.Attributes["href"] = urlHelper.Action(PageAction, PageUrlValues);
+                    if (PageClassesEnabled)
+                    {
+                        tag.AddCssClass(PageClass);
+                        tag.AddCssClass(i == PageModel.CurrentPage
+                        ? PageClassSelected : PageClassNormal);
+                    }
+                    tag.InnerHtml.Append(i.ToString());
+                    result.InnerHtml.AppendHtml(tag);
                 }
-                tag.InnerHtml.Append(i.ToString());
-                result.InnerHtml.AppendHtml(tag);
+                output.Content.AppendHtml(result.InnerHtml);
             }
-            output.Content.AppendHtml(result.InnerHtml);
+            else
+            {
+                IUrlHelper urlHelper = urlHelperFactory.GetUrlHelper(ViewContext);
+                TagBuilder result = new TagBuilder("div");
+                for (int i = 1; i <= PageModel.TotalPages; i++)
+                {
+                    TagBuilder tag = new TagBuilder("a");
+                    PageUrlValues["jobPage"] = i;
+                    tag.Attributes["href"] = urlHelper.Action(PageAction, PageUrlValues);
+                    if (PageClassesEnabled)
+                    {
+                        tag.AddCssClass(PageClass);
+                        tag.AddCssClass(i == PageModel.CurrentPage
+                        ? PageClassSelected : PageClassNormal);
+                    }
+                    tag.InnerHtml.Append(i.ToString());
+                    result.InnerHtml.AppendHtml(tag);
+                }
+                output.Content.AppendHtml(result.InnerHtml);
+            }
         }
     }
 }

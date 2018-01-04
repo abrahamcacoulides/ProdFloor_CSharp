@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ProdFloor.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace ProdFloor
 {
@@ -24,8 +25,19 @@ namespace ProdFloor
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(
                 Configuration["Data:ProdFloorJobs:ConnectionString"]));
+
+            services.AddDbContext<AppIdentityDbContext>(options =>
+            options.UseSqlServer(
+                Configuration["Data:ProdFloorIdentity:ConnectionString"]));
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+            .AddEntityFrameworkStores<AppIdentityDbContext>()
+            .AddDefaultTokenProviders();
+
             services.AddTransient<IJobRepository, EFJobRepository>();
             services.AddMvc();
+            services.AddMemoryCache();
+            services.AddSession();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -33,6 +45,8 @@ namespace ProdFloor
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            app.UseSession();
+            app.UseAuthentication();
             app.UseMvc(routes => {
 
                 routes.MapRoute(
@@ -40,6 +54,11 @@ namespace ProdFloor
                     template: "{jobType}/Page{jobPage:int}",
                     defaults: new { controller = "Job", action = "List" }
                 );
+
+                routes.MapRoute(
+                    name: null,
+                    template: "{pendingJobPage:int}_{productionJobPage:int}",
+                    defaults: new{controller = "Home", action = "Index" });
 
                 routes.MapRoute(
                     name: null,
@@ -58,12 +77,12 @@ namespace ProdFloor
                 routes.MapRoute(
                     name: null,
                     template: "",
-                    defaults: new { controller = "Job", action = "List",
-                        jobPage = 1 });
+                    defaults: new { controller = "Home", action = "Index" });
 
                 routes.MapRoute(name: null, template: "{controller}/{action}/{id?}");
             });
             SeedData.EnsurePopulated(app);
+            IdentitySeedData.EnsurePopulated(app);
         }
     }
 }

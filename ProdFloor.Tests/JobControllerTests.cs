@@ -7,6 +7,7 @@ using ProdFloor.Controllers;
 using ProdFloor.Models;
 using ProdFloor.Models.ViewModels;
 using Xunit;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace ProdFloor.Tests
 {
@@ -127,6 +128,28 @@ namespace ProdFloor.Tests
             Assert.Equal(2, res2);
             Assert.Equal(1, res3);
             Assert.Equal(5, resAll);
+        }
+
+        [Fact]
+        public void Can_Save_Valid_Changes()
+        {
+            // Arrange - create mock repository
+            Mock<IJobRepository> mock = new Mock<IJobRepository>();
+
+            // Arrange - create mock temp data
+            Mock<ITempDataDictionary> tempData = new Mock<ITempDataDictionary>();
+
+            // Arrange - create the controller
+            JobController target = new JobController(mock.Object)
+            {
+                TempData = tempData.Object
+            };
+
+            // Arrange - create a Job
+            Job Job = new Job { Name = "Test" };
+
+            // Act - try to save the Job
+            IActionResult result = target.Edit(Job);
         }
     }
 }

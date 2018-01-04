@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using ProdFloor.Models;
 using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ProdFloor.Controllers
 {
-    public class AdminController
+    [Authorize]
+    public class AdminController : Controller
     {
+        public ViewResult Index() => View();
     }
 }

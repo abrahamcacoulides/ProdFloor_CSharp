@@ -39,5 +39,17 @@ namespace ProdFloor.Models
             }
             context.SaveChanges();
         }
+
+        public Job DeleteJob(int JobID)
+        {
+            Job dbEntry = context.Jobs
+                .FirstOrDefault(p => p.JobID == JobID);
+            if (dbEntry != null)
+            {
+                context.Jobs.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
     }
 }

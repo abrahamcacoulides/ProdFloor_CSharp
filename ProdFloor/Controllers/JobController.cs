@@ -2,6 +2,7 @@
 using ProdFloor.Models;
 using ProdFloor.Models.ViewModels;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ProdFloor.Controllers
 {
@@ -15,17 +16,18 @@ namespace ProdFloor.Controllers
             repository = repo;
         }
 
-        public ViewResult List(string jobType, int JobPage = 1)
+        [Authorize]
+        public ViewResult List(string jobType, int jobPage = 1)
             => View(new JobsListViewModel
             {
                 Jobs = repository.Jobs
                 .Where(j => jobType == null || j.JobType == jobType)
                 .OrderBy(p => p.JobID)
-                .Skip((JobPage - 1) * PageSize)
+                .Skip((jobPage - 1) * PageSize)
                 .Take(PageSize),
                 PagingInfo = new PagingInfo
                 {
-                    CurrentPage = JobPage,
+                    CurrentPage = jobPage,
                     ItemsPerPage = PageSize,
                     TotalItems =jobType == null ?
                     repository.Jobs.Count() :
@@ -35,8 +37,38 @@ namespace ProdFloor.Controllers
                 CurrentJobType = jobType
             });
 
-        public ViewResult Edit(int jobId) =>
+        public ViewResult Edit(int ID) =>
             View(repository.Jobs
-                .FirstOrDefault(j => j.JobID == jobId));
+                .FirstOrDefault(j => j.JobID == ID));
+
+        [HttpPost]
+        public IActionResult Edit(Job job)
+        {
+            if (ModelState.IsValid)
+            {
+                repository.SaveJob(job);
+                TempData["message"] = $"{job.Name} has been saved...{job.JobID}";
+                return RedirectToAction("List");
+            }
+            else
+            {
+                // there is something wrong with the data values
+                return View(job);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int ID)
+        {
+            Job deletedJob = repository.DeleteJob(ID);
+
+            if (deletedJob != null)
+            {
+                TempData["message"] = $"{deletedJob.Name} was deleted";
+            }
+            return RedirectToAction("List");
+        }
+
+        public ViewResult Add() => View("Edit", new Job());
     }
 }

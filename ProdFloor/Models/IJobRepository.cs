@@ -7,5 +7,7 @@ namespace ProdFloor.Models
         IQueryable<Job> Jobs { get; }
 
         void SaveJob(Job job);
+
+        Job DeleteJob(int jobID);
     }
 }

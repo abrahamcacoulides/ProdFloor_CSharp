@@ -12,7 +12,7 @@ namespace ProdFloor.Models
         {
             ApplicationDbContext context = app.ApplicationServices
             .GetRequiredService<ApplicationDbContext>();
-            context.Database.Migrate();
+            //context.Database.Migrate();
             if (!context.Jobs.Any())
             {
                 context.Jobs.AddRange(

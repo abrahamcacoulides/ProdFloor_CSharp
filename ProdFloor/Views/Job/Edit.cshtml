@@ -1,48 +1,57 @@
 ﻿@model Job
 @{
-    ViewBag.Title = "Edit Product";
-    Layout = "_Layout";
+    ViewBag.Title = "Edit Job";
+    Layout = "_LayoutIndex";
 }
 <form asp-action="Edit" method="post">
     <input type="hidden" asp-for="JobID" />
     <div class="form-group">
         <label asp-for="Name"></label>
+        <div><span asp-validation-for="Name" class="text-danger"></span></div>
         <input asp-for="Name" class="form-control" />
     </div>
     <div class="form-group">
         <label asp-for="JobNum"></label>
+        <div><span asp-validation-for="JobNum" class="text-danger"></span></div>
         <input asp-for="JobNum" class="form-control" />
     </div>
     <div class="form-group">
         <label asp-for="JobType"></label>
+        <div><span asp-validation-for="JobType" class="text-danger"></span></div>
         <input asp-for="JobType" class="form-control" />
     </div>
     <div class="form-group">
         <label asp-for="PO"></label>
+        <div><span asp-validation-for="PO" class="text-danger"></span></div>
         <input asp-for="PO" class="form-control" />
     </div>
     <div class="form-group">
         <label asp-for="ShipDate"></label>
+        <div><span asp-validation-for="ShipDate" class="text-danger"></span></div>
         <input asp-for="ShipDate" class="form-control" />
     </div>
     <div class="form-group">
         <label asp-for="Cust"></label>
+        <div><span asp-validation-for="Cust" class="text-danger"></span></div>
         <input asp-for="Cust" class="form-control" />
     </div>
     <div class="form-group">
         <label asp-for="Contractor"></label>
+        <div><span asp-validation-for="Contractor" class="text-danger"></span></div>
         <input asp-for="Contractor" class="form-control" />
     </div>
     <div class="form-group">
         <label asp-for="JobState"></label>
+        <div><span asp-validation-for="JobState" class="text-danger"></span></div>
         <input asp-for="JobState" class="form-control" />
     </div>
     <div class="form-group">
         <label asp-for="SafetyCode"></label>
+        <div><span asp-validation-for="SafetyCode" class="text-danger"></span></div>
         <input asp-for="SafetyCode" class="form-control" />
     </div>
     <div class="text-center">
         <button class="btn btn-primary" type="submit">Save</button>
-        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        <a asp-action="List" class="btn btn-secondary">Cancel</a>
     </div>
 </form>

@@ -11,10 +11,10 @@
     <div class="card-text p-1">
         <form asp-action="Delete" method="post">
             <a asp-action="Edit" class="btn btn-sm btn-warning"
-               asp-route-jobId="@Model.JobID">
+               asp-route-Id="@Model.JobID">
                 Edit
             </a>
-            <input type="hidden" name="JobID" value="@Model.JobID" />
+            <input type="hidden" name="ID" value="@Model.JobID" />
             <button type="submit" class="btn btn-danger btn-sm">
                 Delete
             </button>

@@ -9,7 +9,6 @@ namespace ProdFloor.Models
 {
     public class Job
     {
-        [BindNever]
         public int JobID { get; set; }
 
         [Required(ErrorMessage = "Please enter a name")]
