@@ -1,0 +1,17 @@
+﻿@model JobType
+@{
+    ViewBag.Title = "Edit JobType";
+    Layout = "_AdminLayoutWO";
+}
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="JobTypeID" />
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <div><span asp-validation-for="Name" class="text-danger"></span></div>
+        <input asp-for="Name" class="form-control" />
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Save</button>
+        <a asp-action="List" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>

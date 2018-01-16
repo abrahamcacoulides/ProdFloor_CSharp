@@ -11,6 +11,20 @@ namespace ProdFloor.Models
 
         public DbSet<Job> Jobs { get; set; }
 
+        public DbSet<Country> Countries { get; set; }
+
+        public DbSet<State> States { get; set; }
+
+        public DbSet<City> Cities { get; set; }
+
+        public DbSet<DoorOperator> DoorOperators { get; set; }
+
+        public DbSet<FireCode> FireCodes { get; set; }
+
+        public DbSet<JobType> JobTypes { get; set; }
+
+        public DbSet<LandingSystem> LandingSystems { get; set; }
+
         public class ApplicationDbContextFactory
             : IDesignTimeDbContextFactory<ApplicationDbContext>
         {

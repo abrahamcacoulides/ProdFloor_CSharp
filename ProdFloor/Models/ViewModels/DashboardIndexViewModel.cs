@@ -9,5 +9,7 @@ namespace ProdFloor.Models.ViewModels
         public PagingInfo PendingJobsPagingInfo { get; set; }
         public IEnumerable<Job> ProductionJobs { get; set; }
         public PagingInfo ProductionJobsPagingInfo { get; set; }
+        public string CurrentItem { get; set; }
+        public string CurrentCategory { get; set; }
     }
 }

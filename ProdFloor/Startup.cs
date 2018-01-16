@@ -35,6 +35,7 @@ namespace ProdFloor
             .AddDefaultTokenProviders();
 
             services.AddTransient<IJobRepository, EFJobRepository>();
+            services.AddTransient<IItemRepository, EFItemRepository>();
             services.AddMvc();
             services.AddMemoryCache();
             services.AddSession();
@@ -78,6 +79,8 @@ namespace ProdFloor
                     name: null,
                     template: "",
                     defaults: new { controller = "Home", action = "Index" });
+
+                routes.MapRoute(name: null, template: "{controller}/{action}/Page{page:int}");
 
                 routes.MapRoute(name: null, template: "{controller}/{action}/{id?}");
             });

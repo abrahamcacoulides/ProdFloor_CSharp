@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using System.Collections.Generic;
 using ProdFloor.Models;
+using ProdFloor.Models.ViewModels;
 
 namespace ProdFloor.Components
 {

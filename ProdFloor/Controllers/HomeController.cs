@@ -17,7 +17,7 @@ namespace ProdFloor.Controllers
             repository = repo;
         }
 
-        [Authorize]
+        //[Authorize]
         public ActionResult Index(int pendingJobPage = 1,
             int productionJobPage = 1)
             => View(new DashboardIndexViewModel
