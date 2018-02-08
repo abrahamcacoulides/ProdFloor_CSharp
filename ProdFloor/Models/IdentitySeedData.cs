@@ -11,12 +11,12 @@ namespace ProdFloor.Models
 
         public static async void EnsurePopulated(IApplicationBuilder app)
         {
-            UserManager<IdentityUser> userManager = app.ApplicationServices
-            .GetRequiredService<UserManager<IdentityUser>>();
-            IdentityUser user = await userManager.FindByIdAsync(adminUser);
+            UserManager<AppUser> userManager = app.ApplicationServices
+            .GetRequiredService<UserManager<AppUser>>();
+            AppUser user = await userManager.FindByIdAsync(adminUser);
             if (user == null)
             {
-                user = new IdentityUser("Admin");
+                user = new AppUser { UserName = adminUser};
                 await userManager.CreateAsync(user, adminPassword);
             }
         }

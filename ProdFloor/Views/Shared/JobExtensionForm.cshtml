@@ -1,0 +1,167 @@
+﻿@model JobExtension
+@{
+    IEnumerable<DoorOperator> doorOperators = ViewData["DoorOperators"] as IEnumerable<DoorOperator>;
+}
+<form asp-action="Create" method="post">
+    <input type="hidden" asp-for="JobID" />
+    <input type="hidden" asp-for="JobExtensionID" />
+    <div class="form-group row has-warning has-feedback">
+        <label asp-for="NumOfStops" class="col-sm-2 col-form-label"></label>
+        <div><span asp-validation-for="NumOfStops" class="text-danger"></span></div>
+        <input asp-for="NumOfStops" class="form-control col-sm-7" />
+    </div>
+    <div class="form-group row">
+        <label asp-for="JobTypeMain" class="col-sm-2 col-form-label"></label>
+        <div><span asp-validation-for="JobTypeMain" class="text-danger"></span></div>
+        <input asp-for="JobTypeMain" class="form-control col-sm-7" />
+    </div>
+    <div class="form-group row">
+        <label asp-for="JobTypeAdd" class="col-sm-2 col-form-label"></label>
+        <div><span asp-validation-for="JobTypeAdd" class="text-danger"></span></div>
+        <input asp-for="JobTypeAdd" class="form-control col-sm-7" />
+    </div>
+    <div class="form-group row">
+        <label asp-for="InputVoltage" class="col-sm-2 col-form-label"></label>
+        <div><span asp-validation-for="InputVoltage" class="text-danger"></span></div>
+        <input asp-for="InputVoltage" class="form-control col-sm-7" />
+    </div>
+    <div class="form-group row">
+        <label asp-for="InputPhase" class="col-sm-2 col-form-label"></label>
+        <div><span asp-validation-for="InputPhase" class="text-danger"></span></div>
+        <input asp-for="InputPhase" class="form-control col-sm-7" />
+    </div>
+    <div class="form-group row">
+        <label asp-for="InputFrecuency" class="col-sm-2 col-form-label"></label>
+        <div><span asp-validation-for="InputFrecuency" class="text-danger"></span></div>
+        <input asp-for="InputFrecuency" class="form-control col-sm-7" />
+    </div>
+    <div class="form-group row">
+        <label asp-for="DoorGate" class="col-sm-2 col-form-label"></label>
+        <div><span asp-validation-for="DoorGate" class="text-danger"></span></div>
+        <select asp-for="DoorGate">
+            <option>Please select one</option>
+            @foreach (string style in doorOperators.Select(d => d.Style).Distinct())
+            {
+                @if (Model.DoorStyle != "" && Model.DoorStyle == style)
+                {
+                    <option value="@style" selected">@style</option>
+                }
+                else
+                {
+                    <option value="@style">@style</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="form-group row">
+        <label asp-for="DoorHoist" class="col-sm-2 col-form-label"></label>
+        <div><span asp-validation-for="DoorHoist" class="text-danger"></span></div>
+        <select asp-for="DoorHoist">
+            <option>Please select one</option>
+            @foreach (string style in doorOperators.Select(d => d.Style).Distinct())
+            {
+                @if (Model.DoorStyle != "" && Model.DoorStyle == style)
+                {
+                    <option value="@style" selected">@style</option>
+                }
+                else
+                {
+                    <option value="@style">@style</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="form-group row">
+        <label asp-for="DoorBrand" class="col-sm-2 col-form-label"></label>
+        <div><span asp-validation-for="DoorBrand" class="text-danger"></span></div>
+        <select asp-for="DoorBrand">
+            <option>Please select one</option>
+            @foreach (string brand in doorOperators.Select(d => d.Brand).Distinct())
+            {
+                @if (Model.DoorBrand != "" && Model.DoorBrand == brand)
+                {
+                    <option value="@brand" selected">@brand</option>
+                }
+                else
+                {
+                    <option value="@brand">@brand</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="form-group row">
+        <label asp-for="DoorModel" class="col-sm-2 col-form-label"></label>
+        <div><span asp-validation-for="DoorModel" class="text-danger"></span></div>
+        <select asp-for="DoorModel">
+            <option>Please select one</option>
+            @foreach (string name in doorOperators.Select(d => d.Name).Distinct())
+            {
+                @if (Model.DoorModel != "" && Model.DoorModel == name)
+                {
+                    <option value="@name" selected">@name</option>
+                }
+                else
+                {
+                    <option value="@name">@name</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="form-row col-sm-9">
+        @*Grid for checkboxes*@
+    <div class="form-group col-3 text-center">
+        <label asp-for="InfDetector" class="col-form-label"></label>
+        <div><span asp-validation-for="InfDetector" class="text-danger"></span></div>
+        <input asp-for="InfDetector" class="form-control" />
+    </div>
+    <div class="form-group col-3 text-center">
+        <label asp-for="MechSafEdge" class="col-form-label text-center"></label>
+        <div><span asp-validation-for="MechSafEdge" class="text-danger"></span></div>
+        <input asp-for="MechSafEdge" class="form-control" />
+    </div>
+    <div class="form-group col-3 text-center">
+        <label asp-for="HeavyDoors" class="col-form-label"></label>
+        <div><span asp-validation-for="HeavyDoors" class="text-danger"></span></div>
+        <input asp-for="HeavyDoors" class="form-control" />
+    </div>
+    <div class="form-group col-3 text-center">
+        <label asp-for="CartopDoorButtons" class="col-form-label"></label>
+        <div><span asp-validation-for="CartopDoorButtons" class="text-danger"></span></div>
+        <input asp-for="CartopDoorButtons" class="form-control " />
+    </div>
+    <div class="form-group col-3 text-center">
+        <label asp-for="DoorHold" class="col-form-label"></label>
+        <div><span asp-validation-for="DoorHold" class="text-danger"></span></div>
+        <input asp-for="DoorHold" class="form-control" />
+    </div>
+    <div class="form-group col-3 text-center">
+        <label asp-for="Nudging" class="col-form-label"></label>
+        <div><span asp-validation-for="Nudging" class="text-danger"></span></div>
+        <input asp-for="Nudging" class="form-control" />
+    </div>
+    <div class="form-group col-3 text-center">
+        <label asp-for="SCOP" class="col-form-label"></label>
+        <div><span asp-validation-for="SCOP" class="text-danger"></span></div>
+        <input asp-for="SCOP" class="form-control" />
+    </div>
+    <div class="form-group col-3 text-center">
+        <label asp-for="SHC" class="col-form-label"></label>
+        <div><span asp-validation-for="SHC" class="text-danger"></span></div>
+        <input asp-for="SHC" class="form-control" />
+    </div>
+    <div class="form-group col-3 text-center">
+        <label asp-for="SHCRisers" class="col-form-label"></label>
+        <div><span asp-validation-for="SHCRisers" class="text-danger"></span></div>
+        <input asp-for="SHCRisers" class="form-control" />
+    </div>
+    <div class="form-group col-3 text-center">
+        <label asp-for="AUXCOP" class="col-form-label"></label>
+        <div><span asp-validation-for="AUXCOP" class="text-danger"></span></div>
+        <input asp-for="AUXCOP" class="form-control" />
+    </div>
+</div>
+<div class="text-center">
+    <button class="btn btn-primary" type="submit">Save</button>
+    <a asp-action="List" class="btn btn-secondary">Cancel</a>
+</div>
+</form>

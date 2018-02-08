@@ -2,7 +2,9 @@
 @{
     ViewBag.Title = "Edit Job";
     Layout = "_LayoutIndex";
+    IEnumerable<JobType> jobTypes = ViewData["JobTypes"] as IEnumerable<JobType>;
 }
+<div class="bg-dark m-1 p-1"><h4 style="color:white">Edit Job: @Model.JobNum</h4></div>
 <form asp-action="Edit" method="post">
     <input type="hidden" asp-for="JobID" />
     <div class="form-group">
@@ -18,7 +20,20 @@
     <div class="form-group">
         <label asp-for="JobType"></label>
         <div><span asp-validation-for="JobType" class="text-danger"></span></div>
-        <input asp-for="JobType" class="form-control" />
+        <select asp-for="JobType">
+            <option>Please select one</option>
+            @foreach (JobType jobType in jobTypes)
+            {
+                @if (Model.JobType != "" && Model.JobType == jobType.Name)
+                {
+                    <option value="@jobType.Name" selected" >@jobType.Name</option>
+                }
+                else
+                {
+                    <option value="@jobType.Name">@jobType.Name</option>
+                }
+            }
+        </select>
     </div>
     <div class="form-group">
         <label asp-for="PO"></label>

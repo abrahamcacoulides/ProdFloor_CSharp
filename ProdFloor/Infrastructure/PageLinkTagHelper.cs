@@ -86,11 +86,11 @@ namespace ProdFloor.Infrastructure
         {
             IUrlHelper urlHelper = urlHelperFactory.GetUrlHelper(ViewContext);
             TagBuilder result = new TagBuilder("select");
-            foreach(Country country in repository.Countries)
+            foreach (Country country in repository.Countries)
             {
                 TagBuilder tag = new TagBuilder("option");
                 tag.Attributes["Value"] = country.Name;
-                if(country.Name == CurrentCountry)
+                if (country.Name == CurrentCountry)
                 {
                     tag.InnerHtml.Append("Selected");
                 }
@@ -154,34 +154,34 @@ namespace ProdFloor.Infrastructure
     public class PageLinkTagHelper : TagHelper
     {
         private IUrlHelperFactory urlHelperFactory;
-    
+
         public PageLinkTagHelper(IUrlHelperFactory helperFactory)
         {
             urlHelperFactory = helperFactory;
         }
-    
+
         [ViewContext]
         [HtmlAttributeNotBound]
         public ViewContext ViewContext { get; set; }
-    
+
         public PagingInfo PageModel { get; set; }
-    
+
         public string PageAction { get; set; }
-    
+
         [HtmlAttributeName(DictionaryAttributePrefix = "page-url-")]
         public Dictionary<string, object> PageUrlValues { get; set; }
             = new Dictionary<string, object>();
-    
+
         public bool PageClassesEnabled { get; set; } = false;
         public string PageClass { get; set; }
         public string PageClassNormal { get; set; }
         public string PageClassSelected { get; set; }
-    
+
         public bool DashBoardEnabled { get; set; } = false;
         public PagingInfo AdditionalPageModel { get; set; }
         public string MainUrlValue { get; set; }
         public string AddUrlValue { get; set; }
-    
+
         public override void Process(TagHelperContext context,
         TagHelperOutput output)
         {
@@ -226,6 +226,56 @@ namespace ProdFloor.Infrastructure
                 }
                 output.Content.AppendHtml(result.InnerHtml);
             }
+        }
+    }
+
+    [HtmlTargetElement("li-custom")] // not required
+    public class CustomLiHelper : TagHelper
+    {
+        private IUrlHelperFactory urlHelperFactory;
+
+        public CustomLiHelper(IUrlHelperFactory helperFactory)
+        {
+            urlHelperFactory = helperFactory;
+        }
+
+        [ViewContext]
+        [HtmlAttributeNotBound]
+        public ViewContext ViewContext { get; set; }
+
+        public PagingInfo PageModel { get; set; }
+
+        public string PageAction { get; set; }
+
+        [HtmlAttributeName(DictionaryAttributePrefix = "page-url-")]
+        public Dictionary<string, object> PageUrlValues { get; set; }
+            = new Dictionary<string, object>();
+
+        public bool PageClassesEnabled { get; set; } = false;
+        public string PageClass { get; set; }
+        public string PageClassNormal { get; set; }
+        public string PageClassSelected { get; set; }
+
+        public override void Process(TagHelperContext context,
+        TagHelperOutput output)
+        {
+            IUrlHelper urlHelper = urlHelperFactory.GetUrlHelper(ViewContext);
+            TagBuilder result = new TagBuilder("div");
+            for (int i = 1; i <= PageModel.TotalPages; i++)
+            {
+                TagBuilder tag = new TagBuilder("a");
+                PageUrlValues["page"] = i;
+                tag.Attributes["href"] = urlHelper.Action(PageAction, PageUrlValues);
+                if (PageClassesEnabled)
+                {
+                    tag.AddCssClass(PageClass);
+                    tag.AddCssClass(i == PageModel.CurrentPage
+                    ? PageClassSelected : PageClassNormal);
+                }
+                tag.InnerHtml.Append(i.ToString());
+                result.InnerHtml.AppendHtml(tag);
+            }
+            output.Content.AppendHtml(result.InnerHtml);
         }
     }
 }   

@@ -112,6 +112,60 @@ namespace ProdFloor.Migrations
                     b.ToTable("Jobs");
                 });
 
+            modelBuilder.Entity("ProdFloor.Models.JobExtension", b =>
+                {
+                    b.Property<int>("JobExtensionID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("AUXCOP");
+
+                    b.Property<bool>("CartopDoorButtons");
+
+                    b.Property<string>("DoorBrand");
+
+                    b.Property<string>("DoorGate");
+
+                    b.Property<string>("DoorHoist");
+
+                    b.Property<bool>("DoorHold");
+
+                    b.Property<string>("DoorModel");
+
+                    b.Property<string>("DoorStyle");
+
+                    b.Property<bool>("HeavyDoors");
+
+                    b.Property<bool>("InfDetector");
+
+                    b.Property<int>("InputFrecuency");
+
+                    b.Property<int>("InputPhase");
+
+                    b.Property<int>("InputVoltage");
+
+                    b.Property<int>("JobID");
+
+                    b.Property<string>("JobTypeAdd");
+
+                    b.Property<string>("JobTypeMain");
+
+                    b.Property<bool>("MechSafEdge");
+
+                    b.Property<bool>("Nudging");
+
+                    b.Property<int>("NumOfStops");
+
+                    b.Property<bool>("SCOP");
+
+                    b.Property<bool>("SHC");
+
+                    b.Property<int>("SHCRisers");
+
+                    b.HasKey("JobExtensionID");
+
+                    b.ToTable("JobsExtensions");
+                });
+
             modelBuilder.Entity("ProdFloor.Models.JobType", b =>
                 {
                     b.Property<int>("JobTypeID")

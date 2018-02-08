@@ -7,7 +7,7 @@
         <a data-toggle="collapse" href="#collapsejobs" role="button" aria-expanded="false" aria-controls="collapsejobs"
            class="nav-link">Jobs</a>
         <ul id="collapsejobs" class="collapse" role="tabpanel" aria-labelledby="collapsejobs" data-parent="#accordion">
-            @if (Model.Jobtypes == null)    
+            @if (Model.Jobtypes == null)
             {
                 <li class="nav-link" style="padding:4px;text-align:center;margin-bottom:5px">No job types</li>
             }
@@ -158,7 +158,7 @@
                        asp-controller="State"
                        asp-route-country=""
                        asp-route-Page="1">All</a>
-                    </li>
+                </li>
                 @foreach (string country in Model.States)
                 {
                     <li class="nav-link"
@@ -171,5 +171,11 @@
                 }
             }
         </ul>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-controller="Account" asp-action="Index">Users</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" asp-controller="RoleAdmin" asp-action="Index">Roles</a>
     </li>
 </ul>

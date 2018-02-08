@@ -11,8 +11,8 @@ using System;
 namespace ProdFloor.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180116144152_NewCity1")]
-    partial class NewCity1
+    [Migration("20180124220344_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,21 +26,15 @@ namespace ProdFloor.Migrations
                     b.Property<int>("CityID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("CountryID");
+                    b.Property<string>("Country");
 
-                    b.Property<int?>("CurrentFireCodeFireCodeID");
+                    b.Property<string>("CurrentFireCode");
 
                     b.Property<string>("Name");
 
-                    b.Property<int?>("StateID");
+                    b.Property<string>("State");
 
                     b.HasKey("CityID");
-
-                    b.HasIndex("CountryID");
-
-                    b.HasIndex("CurrentFireCodeFireCodeID");
-
-                    b.HasIndex("StateID");
 
                     b.ToTable("Cities");
                 });
@@ -119,6 +113,60 @@ namespace ProdFloor.Migrations
                     b.ToTable("Jobs");
                 });
 
+            modelBuilder.Entity("ProdFloor.Models.JobExtension", b =>
+                {
+                    b.Property<int>("JobExtensionID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("AUXCOP");
+
+                    b.Property<bool>("CartopDoorButtons");
+
+                    b.Property<string>("DoorBrand");
+
+                    b.Property<string>("DoorGate");
+
+                    b.Property<string>("DoorHoist");
+
+                    b.Property<bool>("DoorHold");
+
+                    b.Property<string>("DoorModel");
+
+                    b.Property<string>("DoorStyle");
+
+                    b.Property<bool>("HeavyDoors");
+
+                    b.Property<bool>("InfDetector");
+
+                    b.Property<int>("InputFrecuency");
+
+                    b.Property<int>("InputPhase");
+
+                    b.Property<int>("InputVoltage");
+
+                    b.Property<int>("JobID");
+
+                    b.Property<string>("JobTypeAdd");
+
+                    b.Property<string>("JobTypeMain");
+
+                    b.Property<bool>("MechSafEdge");
+
+                    b.Property<bool>("Nudging");
+
+                    b.Property<int>("NumOfStops");
+
+                    b.Property<bool>("SCOP");
+
+                    b.Property<bool>("SHC");
+
+                    b.Property<int>("SHCRisers");
+
+                    b.HasKey("JobExtensionID");
+
+                    b.ToTable("JobsExtensions");
+                });
+
             modelBuilder.Entity("ProdFloor.Models.JobType", b =>
                 {
                     b.Property<int>("JobTypeID")
@@ -151,37 +199,13 @@ namespace ProdFloor.Migrations
                     b.Property<int>("StateID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("CountryID");
+                    b.Property<string>("Country");
 
                     b.Property<string>("Name");
 
                     b.HasKey("StateID");
 
-                    b.HasIndex("CountryID");
-
                     b.ToTable("States");
-                });
-
-            modelBuilder.Entity("ProdFloor.Models.City", b =>
-                {
-                    b.HasOne("ProdFloor.Models.Country", "Country")
-                        .WithMany()
-                        .HasForeignKey("CountryID");
-
-                    b.HasOne("ProdFloor.Models.FireCode", "CurrentFireCode")
-                        .WithMany()
-                        .HasForeignKey("CurrentFireCodeFireCodeID");
-
-                    b.HasOne("ProdFloor.Models.State", "State")
-                        .WithMany()
-                        .HasForeignKey("StateID");
-                });
-
-            modelBuilder.Entity("ProdFloor.Models.State", b =>
-                {
-                    b.HasOne("ProdFloor.Models.Country", "Country")
-                        .WithMany()
-                        .HasForeignKey("CountryID");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,0 +1,99 @@
+﻿@model Job
+@{ 
+    IEnumerable<FireCode> fireCodes = ViewData["FireCodes"] as IEnumerable<FireCode>;
+    IEnumerable<JobType> JobTypes = ViewData["JobTypes"] as IEnumerable<JobType>;
+    IEnumerable<Country> Countries = ViewData["Countries"] as IEnumerable<Country>;
+    IEnumerable<State> States = ViewData["States"] as IEnumerable<State>;
+    IEnumerable<City> Cities = ViewData["Cities"] as IEnumerable<City>;
+}
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="JobID" />
+    <div class="form-group row">
+        <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+        <div><span asp-validation-for="Name" class="text-danger"></span></div>
+        <input asp-for="Name" class="form-control col-sm-7" />
+    </div>
+    <div class="form-group row">
+        <label asp-for="JobNum" class="col-sm-2 col-form-label"></label>
+        <div><span asp-validation-for="JobNum" class="text-danger"></span></div>
+        <input asp-for="JobNum" class="form-control col-sm-7" />
+    </div>
+    <div class="form-group row">
+        <label asp-for="JobType" class="col-sm-2 col-form-label"></label>
+        <div><span asp-validation-for="JobType" class="text-danger"></span></div>
+        <select asp-for="JobType">
+            <option>Please select one</option>
+            @foreach (string jobType in JobTypes.Select(d => d.Name).Distinct())
+            {
+                @if (Model.JobType != "" && Model.JobType == jobType)
+                {
+                    <option value="@jobType" selected">@jobType</option>
+                }
+                else
+                {
+                    <option value="@jobType">@jobType</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="form-group row">
+        <label asp-for="PO" class="col-sm-2 col-form-label"></label>
+        <div><span asp-validation-for="PO" class="text-danger"></span></div>
+        <input asp-for="PO" class="form-control col-sm-7" />
+    </div>
+    <div class="form-group row">
+        <label asp-for="ShipDate" class="col-sm-2 col-form-label"></label>
+        <div><span asp-validation-for="ShipDate" class="text-danger"></span></div>
+        <input asp-for="ShipDate" class="form-control col-sm-7" />
+    </div>
+    <div class="form-group row">
+        <label asp-for="Cust" class="col-sm-2 col-form-label"></label>
+        <div><span asp-validation-for="Cust" class="text-danger"></span></div>
+        <input asp-for="Cust" class="form-control col-sm-7" />
+    </div>
+    <div class="form-group row">
+        <label asp-for="Contractor" class="col-sm-2 col-form-label"></label>
+        <div><span asp-validation-for="Contractor" class="text-danger"></span></div>
+        <input asp-for="Contractor" class="form-control col-sm-7" />
+    </div>
+    <div class="form-group row">
+        <label asp-for="JobState" class="col-sm-2 col-form-label"></label>
+        <div><span asp-validation-for="JobState" class="text-danger"></span></div>
+        <select asp-for="JobState">
+            <option>Please select one</option>
+            @foreach (string state in States.Select(d => d.Name).Distinct())
+            {
+                @if (Model.JobState != "" && Model.JobState == state)
+                {
+                    <option value="@state" selected">@state</option>
+                }
+                else
+                {
+                    <option value="@state">@state</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="form-group row">
+        <label asp-for="SafetyCode" class="col-sm-2 col-form-label"></label>
+        <div><span asp-validation-for="SafetyCode" class="text-danger"></span></div>
+        <select asp-for="SafetyCode">
+            <option>Please select one</option>
+            @foreach(FireCode firecode in fireCodes)
+            {
+                @if (Model.JobID != 0 && firecode.Name == Model.SafetyCode)
+                {
+                    <option value="@firecode.Name" selected" >@firecode.Name</option>
+                }
+                else
+                {
+                    <option value="@firecode.Name">@firecode.Name</option>
+                }
+            }
+        </select>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Save</button>
+        <a asp-action="List" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>

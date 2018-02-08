@@ -6,13 +6,13 @@
           asp-href-include="/lib/bootstrap/dist/**/*.min.css"
           asp-href-exclude="**/*-reboot*,**/*-grid*" />
     <link href="~/lib/fontawesome/css/font-awesome.min.css" rel="stylesheet" />
-    <script src="/lib/jquery/dist/jquery.min.js"></script>
-    <title>@ViewBag.Title</title>
+    <link href="~/lib/bootstrap/Dashboard.css" rel="stylesheet" />
+    <title>ProdFloor</title>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-            <a class="navbar-brand" href="\">ProdFloor Admin</a>
+            <a class="navbar-brand" href="\">ProdFloor</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -28,78 +28,46 @@
                         <a class="nav-link" href="\Page1\">My Jobs</a>
                     </li>
                     @*<li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown link
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>*@
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Dropdown link
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>*@
                 </ul>
             </div>
             <div class="nav navbar-nav navbar-right">
                 <ul class="navbar-nav">
                     @if (!User.Identity.IsAuthenticated)
-                {
+                    {
 
-                    <li class="nav-item">
-                        <a href="\Account\LogIn">
-                            Login <i class="fa fa-sign-in"></i>
-                        </a>
-                    </li>
-            }
-            else
-            {
-                <li class="nav-item"><a class="nav-link">Hello, @User.Identity.Name</a></li>
-                <li class="nav-item"><a class="nav-link" href="\Account\LogOut"> Log out <span class="fa fa-sign-out"></span></a></li>
-        }
+                        <li class="nav-item">
+                            <a href="\Account\LogIn">
+                                Login <i class="fa fa-sign-in"></i>
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item"><a class="nav-link">Hello, @User.Identity.Name</a></li>
+                        <li class="nav-item"><a class="nav-link" href="\Account\LogOut"> Log out <span class="fa fa-sign-out"></span></a></li>
+                    }
                 </ul>
             </div>
         </nav>
     </header>
-    <br />
-    <br />
-    <br />
     <div class="container-fluid">
-        <div class="row">
-            <nav class="col-sm-2 col-md-2 d-none d-sm-block bg-light sidebar">
-                <ul class="nav nav-pills flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="\">Dashboard<span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Job" asp-action="List">Jobs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="City" asp-action="List">Cities</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="Country" asp-action="List">Countries</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="DoorOperator" asp-action="List">Door Operators</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="FireCode" asp-action="List">Fire Codes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="JobType" asp-action="List">Job Types</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="LandingSystem" asp-action="List">Landing Systems</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" asp-controller="State" asp-action="List">States</a>
-                    </li>
-                </ul>
-            </nav>
-
-            <main role="main" class="col-sm-10 ml-sm-auto col-md-10 pt-3">
-                @RenderBody()
-            </main>
-        </div>
+        @if (TempData["message"] != null)
+        {
+        <div class="alert alert-success">@TempData["message"]</div>
+        }
+        @RenderBody()
     </div>
+    <script src="~/lib/jquery/dist/jquery.slim.js"></script>
+    <script src="~/lib/bootstrap/assets/js/vendor/popper.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

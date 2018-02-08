@@ -19,7 +19,7 @@ namespace ProdFloor.Components
 
         public IViewComponentResult Invoke()
         {
-            ViewBag.SelectedJobType = RouteData?.Values["jobType"];
+            ViewBag.Selected = RouteData?.Values["selected"];
 
             List<string> jobTypes = new List<string>();
             List<string> countries = new List<string>();

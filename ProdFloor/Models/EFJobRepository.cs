@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ProdFloor.Models
@@ -13,6 +14,8 @@ namespace ProdFloor.Models
         }
 
         public IQueryable<Job> Jobs => context.Jobs;
+
+        public IQueryable<JobExtension> JobsExtensions => context.JobsExtensions;
 
         public void SaveJob(Job job)
         {
@@ -39,6 +42,44 @@ namespace ProdFloor.Models
             }
             context.SaveChanges();
         }
+        public void SaveJobExtension(JobExtension jobExtension)
+        {
+            if (jobExtension.JobExtensionID == 0)
+            {
+                context.JobsExtensions.Add(jobExtension);
+            }
+            else
+            {
+                JobExtension dbEntry = context.JobsExtensions
+                .FirstOrDefault(p => p.JobExtensionID == jobExtension.JobExtensionID);
+                if (dbEntry != null)
+                {
+                    dbEntry.JobID = jobExtension.JobID;
+                    dbEntry.NumOfStops = jobExtension.NumOfStops;
+                    dbEntry.JobTypeMain = jobExtension.JobTypeMain;
+                    dbEntry.JobTypeAdd = jobExtension.JobTypeAdd;
+                    dbEntry.InputVoltage = jobExtension.InputVoltage;
+                    dbEntry.InputPhase = jobExtension.InputPhase;
+                    dbEntry.InputFrecuency = jobExtension.InputFrecuency;
+                    dbEntry.DoorGate = jobExtension.DoorGate;
+                    dbEntry.DoorHoist = jobExtension.DoorHoist;
+                    dbEntry.InfDetector = jobExtension.InfDetector;
+                    dbEntry.MechSafEdge = jobExtension.MechSafEdge;
+                    dbEntry.HeavyDoors = jobExtension.HeavyDoors;
+                    dbEntry.CartopDoorButtons = jobExtension.CartopDoorButtons;
+                    dbEntry.DoorHold = jobExtension.DoorHold;
+                    dbEntry.Nudging = jobExtension.Nudging;
+                    dbEntry.DoorStyle = jobExtension.DoorStyle;
+                    dbEntry.DoorBrand = jobExtension.DoorBrand;
+                    dbEntry.DoorModel = jobExtension.DoorModel;
+                    dbEntry.SCOP = jobExtension.SCOP;
+                    dbEntry.SHC = jobExtension.SHC;
+                    dbEntry.SHCRisers = jobExtension.SHCRisers;
+                    dbEntry.AUXCOP = jobExtension.AUXCOP;
+                }
+            }
+            context.SaveChanges();
+        }
 
         public Job DeleteJob(int JobID)
         {
@@ -47,6 +88,17 @@ namespace ProdFloor.Models
             if (dbEntry != null)
             {
                 context.Jobs.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
+        public JobExtension DeleteJobExtension(int jobExtensionID)
+        {
+            JobExtension dbEntry = context.JobsExtensions
+                .FirstOrDefault(p => p.JobExtensionID == jobExtensionID);
+            if (dbEntry != null)
+            {
+                context.JobsExtensions.Remove(dbEntry);
                 context.SaveChanges();
             }
             return dbEntry;

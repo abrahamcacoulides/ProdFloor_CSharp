@@ -11,6 +11,8 @@ namespace ProdFloor.Models
 
         public DbSet<Job> Jobs { get; set; }
 
+        public DbSet<JobExtension> JobsExtensions { get; set; }
+
         public DbSet<Country> Countries { get; set; }
 
         public DbSet<State> States { get; set; }

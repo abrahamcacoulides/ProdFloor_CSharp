@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using ProdFloor.Models.ViewModels;
+using Microsoft.EntityFrameworkCore;
 
 namespace ProdFloor.Models
 {

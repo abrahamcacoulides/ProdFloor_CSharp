@@ -1,0 +1,9 @@
+﻿@model IEnumerable<JobExtension>
+@{
+}
+
+@foreach (JobExtension jobExtension in Model)
+{
+    <h2>@jobExtension.JobID</h2>
+    <h3>@jobExtension.JobExtensionID</h3>
+}

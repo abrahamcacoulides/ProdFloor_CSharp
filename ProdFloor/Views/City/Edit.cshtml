@@ -6,6 +6,7 @@
     IEnumerable<Country> countries = ViewData["Countries"] as IEnumerable<Country>;
     IEnumerable<FireCode> fireCodes = ViewData["FireCodes"] as IEnumerable<FireCode>;
 }
+<div class="bg-dark m-1 p-1"><h4 style="color:white">Edit City: @Model.Name</h4></div>
 <form asp-controller="City" asp-action="Edit" method="post">
     <input type="hidden" asp-for="CityID" />
     <div class="form-group">
