@@ -1,8 +1,6 @@
 ﻿@model JobExtension
-@{
-    IEnumerable<DoorOperator> doorOperators = ViewData["DoorOperators"] as IEnumerable<DoorOperator>;
-}
-<form asp-action="Create" method="post">
+@{ }
+<form asp-action="NextJobExtension" method="post">
     <input type="hidden" asp-for="JobID" />
     <input type="hidden" asp-for="JobExtensionID" />
     <div class="form-group row has-warning has-feedback">
@@ -38,74 +36,23 @@
     <div class="form-group row">
         <label asp-for="DoorGate" class="col-sm-2 col-form-label"></label>
         <div><span asp-validation-for="DoorGate" class="text-danger"></span></div>
-        <select asp-for="DoorGate">
-            <option>Please select one</option>
-            @foreach (string style in doorOperators.Select(d => d.Style).Distinct())
-            {
-                @if (Model.DoorStyle != "" && Model.DoorStyle == style)
-                {
-                    <option value="@style" selected">@style</option>
-                }
-                else
-                {
-                    <option value="@style">@style</option>
-                }
-            }
-        </select>
+        <custom-select select-for="DoorOperatorStyle" selected-value="@Model.DoorGate" asp-for="DoorGate"></custom-select>
     </div>
     <div class="form-group row">
         <label asp-for="DoorHoist" class="col-sm-2 col-form-label"></label>
         <div><span asp-validation-for="DoorHoist" class="text-danger"></span></div>
-        <select asp-for="DoorHoist">
-            <option>Please select one</option>
-            @foreach (string style in doorOperators.Select(d => d.Style).Distinct())
-            {
-                @if (Model.DoorStyle != "" && Model.DoorStyle == style)
-                {
-                    <option value="@style" selected">@style</option>
-                }
-                else
-                {
-                    <option value="@style">@style</option>
-                }
-            }
-        </select>
+        <custom-select select-for="DoorOperatorStyle" selected-value="@Model.DoorHoist" asp-for="DoorHoist"></custom-select>
     </div>
     <div class="form-group row">
         <label asp-for="DoorBrand" class="col-sm-2 col-form-label"></label>
         <div><span asp-validation-for="DoorBrand" class="text-danger"></span></div>
-        <select asp-for="DoorBrand">
-            <option>Please select one</option>
-            @foreach (string brand in doorOperators.Select(d => d.Brand).Distinct())
-            {
-                @if (Model.DoorBrand != "" && Model.DoorBrand == brand)
-                {
-                    <option value="@brand" selected">@brand</option>
-                }
-                else
-                {
-                    <option value="@brand">@brand</option>
-                }
-            }
-        </select>
+        <custom-select select-for="DoorOperatorBrand" selected-value="@Model.DoorBrand" asp-for="DoorBrand"></custom-select>
+
     </div>
     <div class="form-group row">
         <label asp-for="DoorModel" class="col-sm-2 col-form-label"></label>
         <div><span asp-validation-for="DoorModel" class="text-danger"></span></div>
-        <select asp-for="DoorModel">
-            <option>Please select one</option>
-            @foreach (string name in doorOperators.Select(d => d.Name).Distinct())
-            {
-                @if (Model.DoorModel != "" && Model.DoorModel == name)
-                {
-                    <option value="@name" selected">@name</option>
-                }
-                else
-                {
-                    <option value="@name">@name</option>
-                }
-            }
-        </select>
+        <custom-select select-for="DoorOperatorName" selected-value="@Model.DoorModel" asp-for="DoorModel"></custom-select>
     </div>
     <div class="form-row col-sm-9">
         @*Grid for checkboxes*@

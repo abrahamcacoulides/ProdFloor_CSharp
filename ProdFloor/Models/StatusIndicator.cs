@@ -7,7 +7,7 @@ namespace ProdFloor.Models
     {
         public List<IndicatorLine> indicatorCollection = new List<IndicatorLine>();
 
-        public virtual void AddItem(string name, int voltage, string voltageType)
+        public virtual void AddIndicator(string name, int voltage, string voltageType)
         {
             IndicatorLine line = indicatorCollection
                 .Where(p => p.Name == name)
@@ -24,9 +24,20 @@ namespace ProdFloor.Models
             }
         }
 
+        public virtual void RemoveIndicator(string name)
+        {
+            IndicatorLine line = indicatorCollection
+                .Where(p => p.Name == name)
+                .FirstOrDefault();
+
+            if (line != null)
+            {
+                indicatorCollection.Remove(line);
+            }
+        }
+
         public class IndicatorLine
         {
-            public int StatusLineID { get; set; }
             public string Name { get; set; }
             public int Voltage { get; set; }
             public string VoltageType { get; set; }

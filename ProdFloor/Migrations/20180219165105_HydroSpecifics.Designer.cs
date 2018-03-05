@@ -11,9 +11,10 @@ using System;
 namespace ProdFloor.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180219165105_HydroSpecifics")]
+    partial class HydroSpecifics
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,56 +77,6 @@ namespace ProdFloor.Migrations
                     b.HasKey("FireCodeID");
 
                     b.ToTable("FireCodes");
-                });
-
-            modelBuilder.Entity("ProdFloor.Models.GenericFeatures", b =>
-                {
-                    b.Property<int>("GenericFeaturesID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("Attendant");
-
-                    b.Property<bool>("CallEnable");
-
-                    b.Property<string>("CarCallCodeSecurity");
-
-                    b.Property<bool>("CarToLobby");
-
-                    b.Property<bool>("EMT");
-
-                    b.Property<bool>("EP");
-
-                    b.Property<bool>("EQ");
-
-                    b.Property<bool>("FLO");
-
-                    b.Property<bool>("FRON2");
-
-                    b.Property<bool>("Hosp");
-
-                    b.Property<bool>("IDS");
-
-                    b.Property<bool>("IMon");
-
-                    b.Property<bool>("INA");
-
-                    b.Property<bool>("INCP");
-
-                    b.Property<bool>("Ind");
-
-                    b.Property<int>("JobID");
-
-                    b.Property<bool>("LoadWeigher");
-
-                    b.Property<bool>("MView");
-
-                    b.Property<string>("SpecialInstructions");
-
-                    b.Property<string>("SwitchStyle");
-
-                    b.HasKey("GenericFeaturesID");
-
-                    b.ToTable("GenericFeaturesList");
                 });
 
             modelBuilder.Entity("ProdFloor.Models.HydroSpecific", b =>

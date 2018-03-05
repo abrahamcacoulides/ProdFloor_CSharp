@@ -13,6 +13,10 @@ namespace ProdFloor.Models
 
         public DbSet<JobExtension> JobsExtensions { get; set; }
 
+        public DbSet<HydroSpecific> HydroSpecifics { get; set; }
+
+        public DbSet<GenericFeatures> GenericFeaturesList { get; set; }
+
         public DbSet<Country> Countries { get; set; }
 
         public DbSet<State> States { get; set; }

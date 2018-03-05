@@ -117,9 +117,9 @@ namespace ProdFloor.Models
         public bool AUXCOP { get; set; }
     }
 
-    public class HydroSpecifics
+    public class HydroSpecific
     {
-        public int HydroSpecificsID { get; set; }
+        public int HydroSpecificID { get; set; }
         public int JobID { get; set; }
 
         public string Starter { get; set; }
@@ -177,10 +177,12 @@ namespace ProdFloor.Models
         public int IndicatorsID { get; set; }
         public int JobID { get; set; }
 
+        // if SCOP is true these are 24 dc led
         public int CarCallsVoltage { get; set; } //24,48,120
         public string CarCallsVoltageType { get; set; } //AC, DC
         public string CarCallsType { get; set; } //LED, Incandescent
 
+        // if SHC is true these are 24 dc led
         public int HallCallsVoltage { get; set; } //24,48,120
         public string HallCallsVoltageType { get; set; } //AC, DC
         public string HallCallsType { get; set; } //LED, Incandescent

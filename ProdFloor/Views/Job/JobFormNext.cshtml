@@ -1,0 +1,55 @@
+﻿@model Job
+@{ 
+}
+<form asp-action="NextJob" method="post">
+    <input type="hidden" asp-for="JobID" />
+    <div class="form-group row">
+        <label asp-for="Name" class="col-sm-2 col-form-label"></label>
+        <div><span asp-validation-for="Name" class="text-danger"></span></div>
+        <input asp-for="Name" class="form-control col-sm-9" />
+    </div>
+    <div class="form-group row">
+        <label asp-for="JobNum" class="col-sm-2 col-form-label"></label>
+        <div><span asp-validation-for="JobNum" class="text-danger"></span></div>
+        <input asp-for="JobNum" class="form-control col-sm-9" />
+    </div>
+    <div class="form-group row">
+        <label asp-for="JobType" class="col-sm-2 col-form-label"></label>
+        <div><span asp-validation-for="JobType" class="text-danger"></span></div>
+        <input asp-for="JobType" class="form-control col-sm-9" />
+    </div>
+    <div class="form-group row">
+        <label asp-for="PO" class="col-sm-2 col-form-label"></label>
+        <div><span asp-validation-for="PO" class="text-danger"></span></div>
+        <input asp-for="PO" class="form-control col-sm-9" />
+    </div>
+    <div class="form-group row">
+        <label asp-for="ShipDate" class="col-sm-2 col-form-label"></label>
+        <div><span asp-validation-for="ShipDate" class="text-danger"></span></div>
+        <input asp-for="ShipDate" class="form-control col-sm-9" />
+    </div>
+    <div class="form-group row">
+        <label asp-for="Cust" class="col-sm-2 col-form-label"></label>
+        <div><span asp-validation-for="Cust" class="text-danger"></span></div>
+        <input asp-for="Cust" class="form-control col-sm-9" />
+    </div>
+    <div class="form-group row">
+        <label asp-for="Contractor" class="col-sm-2 col-form-label"></label>
+        <div><span asp-validation-for="Contractor" class="text-danger"></span></div>
+        <input asp-for="Contractor" class="form-control col-sm-9" />
+    </div>
+    <div class="form-group row">
+        <label asp-for="JobState" class="col-sm-2 col-form-label"></label>
+        <div><span asp-validation-for="JobState" class="text-danger"></span></div>
+        <input asp-for="JobState" class="form-control col-sm-9" />
+    </div>
+    <div class="form-group row">
+        <label asp-for="SafetyCode" class="col-sm-2 col-form-label"></label>
+        <div><span asp-validation-for="SafetyCode" class="text-danger"></span></div>
+        <custom-select select-for="FireCode" asp-for="SafetyCode" selected-value="@Model.SafetyCode"></custom-select>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" type="submit">Next</button>
+        <a asp-action="List" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>

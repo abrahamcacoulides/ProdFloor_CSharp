@@ -14,8 +14,9 @@ namespace ProdFloor.Models
         }
 
         public IQueryable<Job> Jobs => context.Jobs;
-
         public IQueryable<JobExtension> JobsExtensions => context.JobsExtensions;
+        public IQueryable<HydroSpecific> HydroSpecifics => context.HydroSpecifics;
+        public IQueryable<GenericFeatures> GenericFeaturesList => context.GenericFeaturesList;
 
         public void SaveJob(Job job)
         {
@@ -80,6 +81,80 @@ namespace ProdFloor.Models
             }
             context.SaveChanges();
         }
+        public void SaveHydroSpecific(HydroSpecific hydroSpecific)
+        {
+            if (hydroSpecific.HydroSpecificID == 0)
+            {
+                context.HydroSpecifics.Add(hydroSpecific);
+            }
+            else
+            {
+                HydroSpecific dbEntry = context.HydroSpecifics
+                .FirstOrDefault(p => p.HydroSpecificID == hydroSpecific.HydroSpecificID);
+                if (dbEntry != null)
+                {
+                    dbEntry.JobID = hydroSpecific.JobID;
+                    dbEntry.Starter = hydroSpecific.Starter;
+                    dbEntry.HP = hydroSpecific.HP;
+                    dbEntry.FLA = hydroSpecific.FLA;
+                    dbEntry.SPH = hydroSpecific.SPH;
+                    dbEntry.MotorsNum = hydroSpecific.MotorsNum;
+                    dbEntry.ValveBrand = hydroSpecific.ValveBrand;
+                    dbEntry.ValveModel = hydroSpecific.ValveModel;
+                    dbEntry.ValveCoils = hydroSpecific.ValveCoils;
+                    dbEntry.ValveNum = hydroSpecific.ValveNum;
+                    dbEntry.ValveVoltage = hydroSpecific.ValveVoltage;
+                    dbEntry.Battery = hydroSpecific.Battery;
+                    dbEntry.BatteryBrand = hydroSpecific.BatteryBrand;
+                    dbEntry.LifeJacket = hydroSpecific.LifeJacket;
+                    dbEntry.LOS = hydroSpecific.LOS;
+                    dbEntry.OilCool = hydroSpecific.OilCool;
+                    dbEntry.OilTank = hydroSpecific.OilTank;
+                    dbEntry.PSS = hydroSpecific.PSS;
+                    dbEntry.Resync = hydroSpecific.Resync;
+                    dbEntry.Roped = hydroSpecific.Roped;
+                    dbEntry.VCI = hydroSpecific.VCI;
+                }
+            }
+            context.SaveChanges();
+        }
+        public void SaveGenericFeatures(GenericFeatures genericFeatures)
+        {
+            if (genericFeatures.GenericFeaturesID == 0)
+            {
+                context.GenericFeaturesList.Add(genericFeatures);
+            }
+            else
+            {
+                GenericFeatures dbEntry = context.GenericFeaturesList
+                .FirstOrDefault(p => p.GenericFeaturesID == genericFeatures.GenericFeaturesID);
+                if (dbEntry != null)
+                {
+                    dbEntry.GenericFeaturesID = dbEntry.GenericFeaturesID;
+                    dbEntry.JobID = dbEntry.JobID;
+                    dbEntry.FRON2 = dbEntry.FRON2;
+                    dbEntry.Attendant = dbEntry.Attendant;
+                    dbEntry.CarToLobby = dbEntry.CarToLobby;
+                    dbEntry.EQ = dbEntry.EQ;
+                    dbEntry.EMT = dbEntry.EMT;
+                    dbEntry.EP = dbEntry.EP;
+                    dbEntry.FLO = dbEntry.FLO;
+                    dbEntry.Hosp = dbEntry.Hosp;
+                    dbEntry.Ind = dbEntry.Ind;
+                    dbEntry.INA = dbEntry.INA;
+                    dbEntry.INCP = dbEntry.INCP;
+                    dbEntry.LoadWeigher = dbEntry.LoadWeigher;
+                    dbEntry.SwitchStyle = dbEntry.SwitchStyle;
+                    dbEntry.MView = dbEntry.MView;
+                    dbEntry.IMon = dbEntry.IMon;
+                    dbEntry.IDS = dbEntry.IDS;
+                    dbEntry.CallEnable = dbEntry.CallEnable;
+                    dbEntry.CarCallCodeSecurity = dbEntry.CarCallCodeSecurity;
+                    dbEntry.SpecialInstructions = dbEntry.SpecialInstructions;
+                }
+            }
+            context.SaveChanges();
+        }
 
         public Job DeleteJob(int JobID)
         {
@@ -99,6 +174,28 @@ namespace ProdFloor.Models
             if (dbEntry != null)
             {
                 context.JobsExtensions.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
+        public HydroSpecific DeleteHydroSpecific(int hydroSpecificID)
+        {
+            HydroSpecific dbEntry = context.HydroSpecifics
+                .FirstOrDefault(p => p.HydroSpecificID == hydroSpecificID);
+            if (dbEntry != null)
+            {
+                context.HydroSpecifics.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
+        public GenericFeatures DeleteGenericFeatures(int genericFeaturesID)
+        {
+            GenericFeatures dbEntry = context.GenericFeaturesList
+                .FirstOrDefault(p => p.GenericFeaturesID == genericFeaturesID);
+            if (dbEntry != null)
+            {
+                context.GenericFeaturesList.Remove(dbEntry);
                 context.SaveChanges();
             }
             return dbEntry;

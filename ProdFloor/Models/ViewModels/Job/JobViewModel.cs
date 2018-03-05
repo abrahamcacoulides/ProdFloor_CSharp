@@ -9,7 +9,9 @@ namespace ProdFloor.Models.ViewModels
     {
         public Job CurrentJob { get; set; }
         public JobExtension CurrentJobExtension { get; set; }
-        public HydroSpecifics CurrentHydroSpecifics { get; set; }
+        public HydroSpecific CurrentHydroSpecific { get; set; }
+        public GenericFeatures CurrentGenericFeatures { get; set; }
+        public Indicators CurrentIndicators { get; set; }
         public string CurrentTab { get; set; }
         public string CurrentSeparator { get; set; }
     }
