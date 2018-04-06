@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace ProdFloor.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class FireCodeController : Controller
     {
         private IItemRepository repository;
@@ -15,8 +16,7 @@ namespace ProdFloor.Controllers
         {
             repository = repo;
         }
-
-        [Authorize]
+        
         public ViewResult List(int page = 1)
             => View(new FireCodesListViewModel
             {

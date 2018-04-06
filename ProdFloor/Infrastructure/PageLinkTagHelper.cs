@@ -263,6 +263,7 @@ namespace ProdFloor.Infrastructure
                 output.Attributes.Add("name", name);
             }
             TagBuilder m_tag = new TagBuilder("option");
+            m_tag.Attributes["value"] = "";
             m_tag.InnerHtml.Append("Please select one");
             result.InnerHtml.AppendHtml(m_tag);
             foreach (string style in itemsrepository.DoorOperators.Select(d=>d.Style).Distinct())
@@ -343,6 +344,7 @@ namespace ProdFloor.Infrastructure
                 output.Attributes.Add("name", name);
             }
             TagBuilder m_tag = new TagBuilder("option");
+            m_tag.Attributes["value"] = "";
             m_tag.InnerHtml.Append("Please select one");
             result.InnerHtml.AppendHtml(m_tag);
             IQueryable<string> options = CaseFor(SelectFor);
@@ -414,7 +416,7 @@ namespace ProdFloor.Infrastructure
                 output.Attributes.Add("name", name);
             }
             TagBuilder m_tag = new TagBuilder("option");
-            m_tag.InnerHtml.Append("Please select one");
+            m_tag.InnerHtml.Append("---");
             result.InnerHtml.AppendHtml(m_tag);
             IQueryable<string> options = CaseFor(SelectFor);
             foreach (string option in options)

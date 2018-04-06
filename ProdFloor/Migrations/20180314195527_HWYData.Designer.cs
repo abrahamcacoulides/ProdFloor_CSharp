@@ -11,9 +11,10 @@ using System;
 namespace ProdFloor.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180314195527_HWYData")]
+    partial class HWYData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,15 +86,9 @@ namespace ProdFloor.Migrations
 
                     b.Property<bool>("Attendant");
 
-                    b.Property<bool>("CRO");
-
                     b.Property<bool>("CallEnable");
 
                     b.Property<string>("CarCallCodeSecurity");
-
-                    b.Property<bool>("CarCallRead");
-
-                    b.Property<bool>("CarKey");
 
                     b.Property<bool>("CarToLobby");
 
@@ -106,12 +101,6 @@ namespace ProdFloor.Migrations
                     b.Property<bool>("FLO");
 
                     b.Property<bool>("FRON2");
-
-                    b.Property<bool>("HCRO");
-
-                    b.Property<bool>("HallCallRead");
-
-                    b.Property<bool>("HallKey");
 
                     b.Property<bool>("Hosp");
 
@@ -183,8 +172,7 @@ namespace ProdFloor.Migrations
 
                     b.Property<int>("JobID");
 
-                    b.Property<string>("LandingSystem")
-                        .IsRequired();
+                    b.Property<string>("LandingSystem");
 
                     b.Property<bool>("RearEightServed");
 
@@ -260,18 +248,15 @@ namespace ProdFloor.Migrations
 
                     b.Property<int>("SPH");
 
-                    b.Property<string>("Starter")
-                        .IsRequired();
+                    b.Property<string>("Starter");
 
                     b.Property<bool>("VCI");
 
-                    b.Property<string>("ValveBrand")
-                        .IsRequired();
+                    b.Property<string>("ValveBrand");
 
                     b.Property<int>("ValveCoils");
 
-                    b.Property<string>("ValveModel")
-                        .IsRequired();
+                    b.Property<string>("ValveModel");
 
                     b.Property<int>("ValveNum");
 
@@ -287,20 +272,17 @@ namespace ProdFloor.Migrations
                     b.Property<int>("IndicatorID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("CarCallsType")
-                        .IsRequired();
+                    b.Property<string>("CarCallsType");
 
-                    b.Property<string>("CarCallsVoltage")
-                        .IsRequired();
+                    b.Property<int>("CarCallsVoltage");
 
-                    b.Property<string>("CarCallsVoltageType")
-                        .IsRequired();
+                    b.Property<string>("CarCallsVoltageType");
 
                     b.Property<bool>("CarLanterns");
 
                     b.Property<string>("CarLanternsType");
 
-                    b.Property<string>("CarLanternsVoltage");
+                    b.Property<int>("CarLanternsVoltage");
 
                     b.Property<string>("CarLanternsVoltageType");
 
@@ -314,20 +296,17 @@ namespace ProdFloor.Migrations
 
                     b.Property<string>("CarPIType");
 
-                    b.Property<string>("HallCallsType")
-                        .IsRequired();
+                    b.Property<string>("HallCallsType");
 
-                    b.Property<string>("HallCallsVoltage")
-                        .IsRequired();
+                    b.Property<int>("HallCallsVoltage");
 
-                    b.Property<string>("HallCallsVoltageType")
-                        .IsRequired();
+                    b.Property<string>("HallCallsVoltageType");
 
                     b.Property<bool>("HallLanterns");
 
                     b.Property<string>("HallLanternsType");
 
-                    b.Property<string>("HallLanternsVoltage");
+                    b.Property<int>("HallLanternsVoltage");
 
                     b.Property<string>("HallLanternsVoltageType");
 
@@ -341,11 +320,9 @@ namespace ProdFloor.Migrations
 
                     b.Property<string>("HallPIType");
 
-                    b.Property<string>("IndicatorsVoltage")
-                        .IsRequired();
+                    b.Property<int>("IndicatorsVoltage");
 
-                    b.Property<string>("IndicatorsVoltageType")
-                        .IsRequired();
+                    b.Property<string>("IndicatorsVoltageType");
 
                     b.Property<int>("JobID");
 
@@ -421,19 +398,15 @@ namespace ProdFloor.Migrations
 
                     b.Property<bool>("CartopDoorButtons");
 
-                    b.Property<string>("DoorBrand")
-                        .IsRequired();
+                    b.Property<string>("DoorBrand");
 
-                    b.Property<string>("DoorGate")
-                        .IsRequired();
+                    b.Property<string>("DoorGate");
 
-                    b.Property<string>("DoorHoist")
-                        .IsRequired();
+                    b.Property<string>("DoorHoist");
 
                     b.Property<bool>("DoorHold");
 
-                    b.Property<string>("DoorModel")
-                        .IsRequired();
+                    b.Property<string>("DoorModel");
 
                     b.Property<bool>("HeavyDoors");
 
@@ -447,11 +420,9 @@ namespace ProdFloor.Migrations
 
                     b.Property<int>("JobID");
 
-                    b.Property<string>("JobTypeAdd")
-                        .IsRequired();
+                    b.Property<string>("JobTypeAdd");
 
-                    b.Property<string>("JobTypeMain")
-                        .IsRequired();
+                    b.Property<string>("JobTypeMain");
 
                     b.Property<bool>("MechSafEdge");
 

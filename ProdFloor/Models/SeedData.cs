@@ -23,6 +23,8 @@ namespace ProdFloor.Models
                         JobNum = 2017088571,
                         PO = 3398238,
                         Cust = "OTIS-MP",
+                        JobCountry = "USA",
+                        JobCity = "Austin",
                         JobState = "Texas",
                         SafetyCode = "ASME A17.1-2007/CSA B44-07",
                         JobType = "M2000",
@@ -35,8 +37,10 @@ namespace ProdFloor.Models
                         JobNum = 2017088362,
                         PO = 3398175,
                         Cust = "FAKE-2",
+                        JobCountry = "USA",
+                        JobCity = "Pasadena",
                         JobState = "California",
-                        SafetyCode = "ASME A17.1-2004 w/CA TITLE 8,GROUP IV ",
+                        SafetyCode = "ASME A17.1-2004 w/CA TITLE 8,GROUP IV",
                         JobType = "M4000",
                         Contractor = "Contractor 2",
                         ShipDate = new DateTime(2017, 12, 12)
@@ -47,6 +51,8 @@ namespace ProdFloor.Models
                         JobNum = 2017088536,
                         PO = 3397819,
                         Cust = "CAEE2999",
+                        JobCountry = "USA",
+                        JobCity = "Los Angeles",
                         JobState = "California",
                         SafetyCode = "ASME A17.1-2004 w/CA TITLE 8,GROUP IV ",
                         JobType = "ELEM",
@@ -59,6 +65,8 @@ namespace ProdFloor.Models
                         JobNum = 2017088535,
                         PO = 3397817,
                         Cust = "CAEE3000",
+                        JobCountry = "USA",
+                        JobCity = "Sacramento",
                         JobState = "California",
                         SafetyCode = "ASME A17.1-2004 w/CA TITLE 8,GROUP IV ",
                         JobType = "M2000",
@@ -811,7 +819,7 @@ namespace ProdFloor.Models
                     new FireCode { Name = "ASME A17.1b-2009/CSA B44b-09" },
                     new FireCode { Name = "ASME A17.1-2010/CSA B44-10" },
                     new FireCode { Name = "ASME A17.1-2013/CSA B44-13" },
-                    new FireCode { Name = "ASME A17.1-2013/CSA B44-16" }
+                    new FireCode { Name = "ASME A17.1-2016/CSA B44-16" }
                     );
                 context.SaveChanges();
             }

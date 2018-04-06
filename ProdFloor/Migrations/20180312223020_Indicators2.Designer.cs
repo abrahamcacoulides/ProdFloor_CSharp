@@ -11,9 +11,10 @@ using System;
 namespace ProdFloor.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180312223020_Indicators2")]
+    partial class Indicators2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,15 +86,9 @@ namespace ProdFloor.Migrations
 
                     b.Property<bool>("Attendant");
 
-                    b.Property<bool>("CRO");
-
                     b.Property<bool>("CallEnable");
 
                     b.Property<string>("CarCallCodeSecurity");
-
-                    b.Property<bool>("CarCallRead");
-
-                    b.Property<bool>("CarKey");
 
                     b.Property<bool>("CarToLobby");
 
@@ -106,12 +101,6 @@ namespace ProdFloor.Migrations
                     b.Property<bool>("FLO");
 
                     b.Property<bool>("FRON2");
-
-                    b.Property<bool>("HCRO");
-
-                    b.Property<bool>("HallCallRead");
-
-                    b.Property<bool>("HallKey");
 
                     b.Property<bool>("Hosp");
 
@@ -138,93 +127,6 @@ namespace ProdFloor.Migrations
                     b.HasKey("GenericFeaturesID");
 
                     b.ToTable("GenericFeaturesList");
-                });
-
-            modelBuilder.Entity("ProdFloor.Models.HoistWayData", b =>
-                {
-                    b.Property<int>("HoistWayDataID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("Capacity");
-
-                    b.Property<int>("DownSpeed");
-
-                    b.Property<bool>("FrontEightServed");
-
-                    b.Property<bool>("FrontEleventhServed");
-
-                    b.Property<bool>("FrontFifteenthServed");
-
-                    b.Property<bool>("FrontFifthServed");
-
-                    b.Property<bool>("FrontFirstServed");
-
-                    b.Property<bool>("FrontFourteenthServed");
-
-                    b.Property<bool>("FrontFourthServed");
-
-                    b.Property<bool>("FrontNinthServed");
-
-                    b.Property<bool>("FrontSecondServed");
-
-                    b.Property<bool>("FrontSeventhServed");
-
-                    b.Property<bool>("FrontSexthServed");
-
-                    b.Property<bool>("FrontSixteenthServed");
-
-                    b.Property<bool>("FrontTenthServed");
-
-                    b.Property<bool>("FrontThirdServed");
-
-                    b.Property<bool>("FrontThirteenthServed");
-
-                    b.Property<bool>("FrontTwelvethServed");
-
-                    b.Property<int>("JobID");
-
-                    b.Property<string>("LandingSystem")
-                        .IsRequired();
-
-                    b.Property<bool>("RearEightServed");
-
-                    b.Property<bool>("RearEleventhServed");
-
-                    b.Property<bool>("RearFifteenthServed");
-
-                    b.Property<bool>("RearFifthServed");
-
-                    b.Property<bool>("RearFirstServed");
-
-                    b.Property<bool>("RearFourteenthServed");
-
-                    b.Property<bool>("RearFourthServed");
-
-                    b.Property<bool>("RearNinthServed");
-
-                    b.Property<bool>("RearSecondServed");
-
-                    b.Property<bool>("RearSeventhServed");
-
-                    b.Property<bool>("RearSexthServed");
-
-                    b.Property<bool>("RearSixteenthServed");
-
-                    b.Property<bool>("RearTenthServed");
-
-                    b.Property<bool>("RearThirdServed");
-
-                    b.Property<bool>("RearThirteenthServed");
-
-                    b.Property<bool>("RearTwelvethServed");
-
-                    b.Property<int>("TotalTravel");
-
-                    b.Property<int>("UpSpeed");
-
-                    b.HasKey("HoistWayDataID");
-
-                    b.ToTable("HoistWayDatas");
                 });
 
             modelBuilder.Entity("ProdFloor.Models.HydroSpecific", b =>
@@ -260,18 +162,15 @@ namespace ProdFloor.Migrations
 
                     b.Property<int>("SPH");
 
-                    b.Property<string>("Starter")
-                        .IsRequired();
+                    b.Property<string>("Starter");
 
                     b.Property<bool>("VCI");
 
-                    b.Property<string>("ValveBrand")
-                        .IsRequired();
+                    b.Property<string>("ValveBrand");
 
                     b.Property<int>("ValveCoils");
 
-                    b.Property<string>("ValveModel")
-                        .IsRequired();
+                    b.Property<string>("ValveModel");
 
                     b.Property<int>("ValveNum");
 
@@ -280,94 +179,6 @@ namespace ProdFloor.Migrations
                     b.HasKey("HydroSpecificID");
 
                     b.ToTable("HydroSpecifics");
-                });
-
-            modelBuilder.Entity("ProdFloor.Models.Indicator", b =>
-                {
-                    b.Property<int>("IndicatorID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("CarCallsType")
-                        .IsRequired();
-
-                    b.Property<string>("CarCallsVoltage")
-                        .IsRequired();
-
-                    b.Property<string>("CarCallsVoltageType")
-                        .IsRequired();
-
-                    b.Property<bool>("CarLanterns");
-
-                    b.Property<string>("CarLanternsType");
-
-                    b.Property<string>("CarLanternsVoltage");
-
-                    b.Property<string>("CarLanternsVoltageType");
-
-                    b.Property<bool>("CarPI");
-
-                    b.Property<string>("CarPIDiscreteType");
-
-                    b.Property<string>("CarPIDiscreteVoltage");
-
-                    b.Property<string>("CarPIDiscreteVoltageType");
-
-                    b.Property<string>("CarPIType");
-
-                    b.Property<string>("HallCallsType")
-                        .IsRequired();
-
-                    b.Property<string>("HallCallsVoltage")
-                        .IsRequired();
-
-                    b.Property<string>("HallCallsVoltageType")
-                        .IsRequired();
-
-                    b.Property<bool>("HallLanterns");
-
-                    b.Property<string>("HallLanternsType");
-
-                    b.Property<string>("HallLanternsVoltage");
-
-                    b.Property<string>("HallLanternsVoltageType");
-
-                    b.Property<bool>("HallPI");
-
-                    b.Property<string>("HallPIDiscreteType");
-
-                    b.Property<string>("HallPIDiscreteVoltage");
-
-                    b.Property<string>("HallPIDiscreteVoltageType");
-
-                    b.Property<string>("HallPIType");
-
-                    b.Property<string>("IndicatorsVoltage")
-                        .IsRequired();
-
-                    b.Property<string>("IndicatorsVoltageType")
-                        .IsRequired();
-
-                    b.Property<int>("JobID");
-
-                    b.Property<bool>("PassingFloor");
-
-                    b.Property<string>("PassingFloorDiscreteType");
-
-                    b.Property<string>("PassingFloorDiscreteVoltage");
-
-                    b.Property<string>("PassingFloorDiscreteVoltageType");
-
-                    b.Property<bool>("PassingFloorEnable");
-
-                    b.Property<string>("PassingFloorType");
-
-                    b.Property<bool>("VoiceAnnunciationPI");
-
-                    b.Property<string>("VoiceAnnunciationPIType");
-
-                    b.HasKey("IndicatorID");
-
-                    b.ToTable("Indicators");
                 });
 
             modelBuilder.Entity("ProdFloor.Models.Job", b =>
@@ -421,19 +232,15 @@ namespace ProdFloor.Migrations
 
                     b.Property<bool>("CartopDoorButtons");
 
-                    b.Property<string>("DoorBrand")
-                        .IsRequired();
+                    b.Property<string>("DoorBrand");
 
-                    b.Property<string>("DoorGate")
-                        .IsRequired();
+                    b.Property<string>("DoorGate");
 
-                    b.Property<string>("DoorHoist")
-                        .IsRequired();
+                    b.Property<string>("DoorHoist");
 
                     b.Property<bool>("DoorHold");
 
-                    b.Property<string>("DoorModel")
-                        .IsRequired();
+                    b.Property<string>("DoorModel");
 
                     b.Property<bool>("HeavyDoors");
 
@@ -447,11 +254,9 @@ namespace ProdFloor.Migrations
 
                     b.Property<int>("JobID");
 
-                    b.Property<string>("JobTypeAdd")
-                        .IsRequired();
+                    b.Property<string>("JobTypeAdd");
 
-                    b.Property<string>("JobTypeMain")
-                        .IsRequired();
+                    b.Property<string>("JobTypeMain");
 
                     b.Property<bool>("MechSafEdge");
 
@@ -509,6 +314,24 @@ namespace ProdFloor.Migrations
                     b.HasKey("StateID");
 
                     b.ToTable("States");
+                });
+
+            modelBuilder.Entity("ProdFloor.Models.StatusIndicator", b =>
+                {
+                    b.Property<int>("StatusIndicatorID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("JobID");
+
+                    b.Property<string>("Name");
+
+                    b.Property<int>("Voltage");
+
+                    b.Property<string>("VoltageType");
+
+                    b.HasKey("StatusIndicatorID");
+
+                    b.ToTable("StatusIndicators");
                 });
 #pragma warning restore 612, 618
         }

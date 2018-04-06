@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace ProdFloor.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class LandingSystemController : Controller
     {
         private IItemRepository repository;

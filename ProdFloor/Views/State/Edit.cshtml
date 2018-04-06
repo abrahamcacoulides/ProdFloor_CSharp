@@ -2,7 +2,6 @@
 @{
     ViewBag.Title = "Edit State";
     Layout = "_AdminLayoutWO";
-    IEnumerable<Country> countries = ViewData["Countries"] as IEnumerable<Country>;
 }
 <div class="bg-dark m-1 p-1"><h4 style="color:white">Edit State: @Model.Name</h4></div>
 <form asp-controller="State" asp-action="Edit" method="post">
@@ -10,20 +9,7 @@
     <div class="form-group">
         <label asp-for="Country"></label>
         <div><span asp-validation-for="Country" class="text-danger"></span></div>
-        <select asp-for="Country">
-            <option>Please select one</option>
-            @foreach (Country country in countries)
-            {
-                @if (Model.StateID != 0 && country.Name == Model.Country)
-                {
-                    <option value="@country.Name" selected">@country.Name</option>
-                }
-                else
-                {
-                    <option value="@country.Name">@country.Name</option>
-                }
-            }
-        </select>
+        <custom-select select-for="Country" asp-for="Country" selected-value="@Model.Country"></custom-select>
     </div>
     <div class="form-group">
         <label asp-for="Name"></label>

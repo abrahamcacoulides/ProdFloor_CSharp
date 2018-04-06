@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ProdFloor.Models.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -17,6 +18,8 @@ namespace ProdFloor.Models
         public IQueryable<JobExtension> JobsExtensions => context.JobsExtensions;
         public IQueryable<HydroSpecific> HydroSpecifics => context.HydroSpecifics;
         public IQueryable<GenericFeatures> GenericFeaturesList => context.GenericFeaturesList;
+        public IQueryable<Indicator> Indicators => context.Indicators;
+        public IQueryable<HoistWayData> HoistWayDatas => context.HoistWayDatas;
 
         public void SaveJob(Job job)
         {
@@ -35,9 +38,12 @@ namespace ProdFloor.Models
                     dbEntry.JobType = job.JobType;
                     dbEntry.PO = job.PO;
                     dbEntry.ShipDate = job.ShipDate;
+                    dbEntry.LatestFinishDate = job.LatestFinishDate;
                     dbEntry.Cust = job.Cust;
                     dbEntry.Contractor = job.Contractor;
+                    dbEntry.JobCountry = job.JobCountry;
                     dbEntry.JobState = job.JobState;
+                    dbEntry.JobCity = job.JobCity;
                     dbEntry.SafetyCode = job.SafetyCode;
                 }
             }
@@ -70,7 +76,6 @@ namespace ProdFloor.Models
                     dbEntry.CartopDoorButtons = jobExtension.CartopDoorButtons;
                     dbEntry.DoorHold = jobExtension.DoorHold;
                     dbEntry.Nudging = jobExtension.Nudging;
-                    dbEntry.DoorStyle = jobExtension.DoorStyle;
                     dbEntry.DoorBrand = jobExtension.DoorBrand;
                     dbEntry.DoorModel = jobExtension.DoorModel;
                     dbEntry.SCOP = jobExtension.SCOP;
@@ -152,6 +157,115 @@ namespace ProdFloor.Models
                     dbEntry.CarCallCodeSecurity = dbEntry.CarCallCodeSecurity;
                     dbEntry.SpecialInstructions = dbEntry.SpecialInstructions;
                 }
+                else
+                {
+                    context.GenericFeaturesList.Add(genericFeatures);
+                }
+            }
+            context.SaveChanges();
+        }
+        public void SaveIndicator(Indicator indicator)
+        {
+            if (indicator.IndicatorID == 0)
+            {
+                context.Indicators.Add(indicator);
+            }
+            else
+            {
+                Indicator dbEntry = context.Indicators
+                .FirstOrDefault(p => p.IndicatorID == indicator.IndicatorID);
+                if (dbEntry != null)
+                {
+                    dbEntry.CarCallsVoltage = indicator.CarCallsVoltage;
+                    dbEntry.CarCallsVoltageType = indicator.CarCallsVoltageType;
+                    dbEntry.CarCallsType = indicator.CarCallsType;
+                    dbEntry.HallCallsVoltage = indicator.HallCallsVoltage;
+                    dbEntry.HallCallsVoltageType = indicator.HallCallsVoltageType;
+                    dbEntry.HallCallsType = indicator.HallCallsType;
+                    dbEntry.CarPI = indicator.CarPI;
+                    dbEntry.CarPIType = indicator.CarPIType;
+                    dbEntry.CarPIDiscreteVoltage = indicator.CarPIDiscreteVoltage;
+                    dbEntry.CarPIDiscreteVoltageType = indicator.CarPIDiscreteVoltageType;
+                    dbEntry.CarPIDiscreteType = indicator.CarPIDiscreteType;
+                    dbEntry.HallPI = indicator.HallPI;
+                    dbEntry.HallPIType = indicator.HallPIType;
+                    dbEntry.HallPIDiscreteVoltage = indicator.HallPIDiscreteVoltage;
+                    dbEntry.HallPIDiscreteVoltageType = indicator.HallPIDiscreteVoltageType;
+                    dbEntry.HallPIDiscreteType = indicator.HallPIDiscreteType;
+                    dbEntry.VoiceAnnunciationPI = indicator.VoiceAnnunciationPI;
+                    dbEntry.VoiceAnnunciationPIType = indicator.VoiceAnnunciationPIType;
+                    dbEntry.CarLanterns = indicator.CarLanterns;
+                    dbEntry.CarLanternsVoltage = indicator.CarLanternsVoltage;
+                    dbEntry.CarLanternsVoltageType = indicator.CarLanternsVoltageType;
+                    dbEntry.CarLanternsType = indicator.CarLanternsType;
+                    dbEntry.HallLanterns = indicator.HallLanterns;
+                    dbEntry.HallLanternsVoltage = indicator.HallLanternsVoltage;
+                    dbEntry.HallLanternsVoltageType = indicator.HallLanternsVoltageType;
+                    dbEntry.HallLanternsType = indicator.HallLanternsType;
+                    dbEntry.PassingFloor = indicator.PassingFloor;
+                    dbEntry.PassingFloorType = indicator.PassingFloorType;
+                    dbEntry.PassingFloorDiscreteVoltage = indicator.PassingFloorDiscreteVoltage;
+                    dbEntry.PassingFloorDiscreteVoltageType = indicator.PassingFloorDiscreteVoltageType;
+                    dbEntry.PassingFloorDiscreteType = indicator.PassingFloorDiscreteType;
+                    dbEntry.PassingFloorEnable = indicator.PassingFloorEnable;
+                    dbEntry.IndicatorsVoltage = indicator.IndicatorsVoltage;
+                    dbEntry.IndicatorsVoltageType = indicator.IndicatorsVoltageType;
+                    dbEntry.JobID = indicator.JobID;
+                }
+            }
+            context.SaveChanges();
+        }
+        public void SaveHoistWayData(HoistWayData hoistWayData)
+        {
+            if (hoistWayData.HoistWayDataID == 0)
+            {
+                context.HoistWayDatas.Add(hoistWayData);
+            }
+            else
+            {
+                HoistWayData dbEntry = context.HoistWayDatas
+                .FirstOrDefault(p => p.HoistWayDataID == hoistWayData.HoistWayDataID);
+                if (dbEntry != null)
+                {
+                    dbEntry.JobID = hoistWayData.JobID;
+                    dbEntry.FrontFirstServed = hoistWayData.FrontFirstServed;
+                    dbEntry.RearFirstServed = hoistWayData.RearFirstServed;
+                    dbEntry.FrontSecondServed = hoistWayData.FrontSecondServed;
+                    dbEntry.RearSecondServed = hoistWayData.RearSecondServed;
+                    dbEntry.FrontThirdServed = hoistWayData.FrontThirdServed;
+                    dbEntry.RearThirdServed = hoistWayData.RearThirdServed;
+                    dbEntry.FrontFourthServed = hoistWayData.FrontFourthServed;
+                    dbEntry.RearFourthServed = hoistWayData.RearFourthServed;
+                    dbEntry.FrontFifthServed = hoistWayData.FrontFifthServed;
+                    dbEntry.RearFifthServed = hoistWayData.RearFifthServed;
+                    dbEntry.FrontSexthServed = hoistWayData.FrontSexthServed;
+                    dbEntry.RearSexthServed = hoistWayData.RearSexthServed;
+                    dbEntry.FrontSeventhServed = hoistWayData.FrontSeventhServed;
+                    dbEntry.RearSeventhServed = hoistWayData.RearSeventhServed;
+                    dbEntry.FrontEightServed = hoistWayData.FrontEightServed;
+                    dbEntry.RearEightServed = hoistWayData.RearEightServed;
+                    dbEntry.FrontNinthServed = hoistWayData.FrontNinthServed;
+                    dbEntry.RearNinthServed = hoistWayData.RearNinthServed;
+                    dbEntry.FrontTenthServed = hoistWayData.FrontTenthServed;
+                    dbEntry.RearTenthServed = hoistWayData.RearTenthServed;
+                    dbEntry.FrontEleventhServed = hoistWayData.FrontEleventhServed;
+                    dbEntry.RearEleventhServed = hoistWayData.RearEleventhServed;
+                    dbEntry.FrontTwelvethServed = hoistWayData.FrontTwelvethServed;
+                    dbEntry.RearTwelvethServed = hoistWayData.RearTwelvethServed;
+                    dbEntry.FrontThirteenthServed = hoistWayData.FrontThirteenthServed;
+                    dbEntry.RearThirteenthServed = hoistWayData.RearThirteenthServed;
+                    dbEntry.FrontFourteenthServed = hoistWayData.FrontFourteenthServed;
+                    dbEntry.RearFourteenthServed = hoistWayData.RearFourteenthServed;
+                    dbEntry.FrontFifteenthServed = hoistWayData.FrontFifteenthServed;
+                    dbEntry.RearFifteenthServed = hoistWayData.RearFifteenthServed;
+                    dbEntry.FrontSixteenthServed = hoistWayData.FrontSixteenthServed;
+                    dbEntry.RearSixteenthServed = hoistWayData.RearSixteenthServed;
+                    dbEntry.Capacity = hoistWayData.Capacity;
+                    dbEntry.UpSpeed = hoistWayData.UpSpeed;
+                    dbEntry.DownSpeed = hoistWayData.DownSpeed;
+                    dbEntry.TotalTravel = hoistWayData.TotalTravel;
+                    dbEntry.LandingSystem = hoistWayData.LandingSystem;
+                }
             }
             context.SaveChanges();
         }
@@ -163,6 +277,52 @@ namespace ProdFloor.Models
             if (dbEntry != null)
             {
                 context.Jobs.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
+        public Job DeleteEngJob(int JobID)
+        {
+            Job dbEntry = context.Jobs
+                .FirstOrDefault(p => p.JobID == JobID);
+            JobExtension jobExtension = context.JobsExtensions
+                .FirstOrDefault(p => p.JobID == JobID);
+            HydroSpecific hydroSpecific = context.HydroSpecifics
+                .FirstOrDefault(p => p.JobID == JobID);
+            GenericFeatures genericFeatures = context.GenericFeaturesList
+                .FirstOrDefault(p => p.JobID == JobID);
+            Indicator indicator = context.Indicators
+                .FirstOrDefault(p => p.JobID == JobID);
+            HoistWayData hoistWayData = context.HoistWayDatas
+                .FirstOrDefault(p => p.JobID == JobID);
+            if (dbEntry != null)
+            {
+                context.Jobs.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            if (jobExtension != null)
+            {
+                context.JobsExtensions.Remove(jobExtension);
+                context.SaveChanges();
+            }
+            if (hydroSpecific != null)
+            {
+                context.HydroSpecifics.Remove(hydroSpecific);
+                context.SaveChanges();
+            }
+            if (genericFeatures != null)
+            {
+                context.GenericFeaturesList.Remove(genericFeatures);
+                context.SaveChanges();
+            }
+            if (indicator != null)
+            {
+                context.Indicators.Remove(indicator);
+                context.SaveChanges();
+            }
+            if (hoistWayData != null)
+            {
+                context.HoistWayDatas.Remove(hoistWayData);
                 context.SaveChanges();
             }
             return dbEntry;
@@ -199,6 +359,110 @@ namespace ProdFloor.Models
                 context.SaveChanges();
             }
             return dbEntry;
+        }
+        public Indicator DeleteIndicator(int indicatorID)
+        {
+            Indicator dbEntry = context.Indicators
+                .FirstOrDefault(p => p.IndicatorID == indicatorID);
+            if (dbEntry != null)
+            {
+                context.Indicators.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
+        public HoistWayData DeleteHoistWayData(int hoistWayDataID)
+        {
+            HoistWayData dbEntry = context.HoistWayDatas
+                .FirstOrDefault(p => p.HoistWayDataID == hoistWayDataID);
+            if (dbEntry != null)
+            {
+                context.HoistWayDatas.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
+
+        public void SaveEngJobView(JobViewModel viewModelToSave)
+        {
+            SaveJob(viewModelToSave.CurrentJob);
+            if (viewModelToSave.CurrentJobExtension.JobID != 0)
+            {
+                JobExtension jobExtension = JobsExtensions.FirstOrDefault(j => j.JobID == viewModelToSave.CurrentJobExtension.JobID);
+                if (jobExtension == null)
+                {
+                    SaveJobExtension(viewModelToSave.CurrentJobExtension);
+                }
+                else
+                {
+                    viewModelToSave.CurrentJobExtension.JobExtensionID = jobExtension.JobExtensionID;
+                    SaveJobExtension(viewModelToSave.CurrentJobExtension);
+                }
+            }
+            if (viewModelToSave.CurrentHydroSpecific != null)
+            {
+                if (viewModelToSave.CurrentHydroSpecific.JobID != 0)
+                {
+                    HydroSpecific hydroSpecific = HydroSpecifics.FirstOrDefault(j => j.JobID == viewModelToSave.CurrentHydroSpecific.JobID);
+                    if (hydroSpecific == null)
+                    {
+                        SaveHydroSpecific(viewModelToSave.CurrentHydroSpecific);
+                    }
+                    else
+                    {
+                        viewModelToSave.CurrentHydroSpecific.HydroSpecificID = hydroSpecific.HydroSpecificID;
+                        SaveHydroSpecific(viewModelToSave.CurrentHydroSpecific);
+                    }
+                }
+            }
+            if (viewModelToSave.CurrentGenericFeatures != null)
+            {
+                if (viewModelToSave.CurrentGenericFeatures.JobID != 0)
+                {
+                    GenericFeatures genericFeatures = GenericFeaturesList.FirstOrDefault(j => j.JobID == viewModelToSave.CurrentGenericFeatures.JobID);
+                    if (genericFeatures == null)
+                    {
+                        SaveGenericFeatures(viewModelToSave.CurrentGenericFeatures);
+                    }
+                    else
+                    {
+                        viewModelToSave.CurrentGenericFeatures.GenericFeaturesID = genericFeatures.GenericFeaturesID;
+                        SaveGenericFeatures(viewModelToSave.CurrentGenericFeatures);
+                    }
+                }
+            }
+            if (viewModelToSave.CurrentIndicator != null)
+            {
+                if (viewModelToSave.CurrentIndicator.JobID != 0)
+                {
+                    Indicator indicator = Indicators.FirstOrDefault(j => j.JobID == viewModelToSave.CurrentIndicator.JobID);
+                    if (indicator == null)
+                    {
+                        SaveIndicator(viewModelToSave.CurrentIndicator);
+                    }
+                    else
+                    {
+                        viewModelToSave.CurrentIndicator.IndicatorID = indicator.IndicatorID;
+                        SaveIndicator(viewModelToSave.CurrentIndicator);
+                    }
+                }
+            }
+            if (viewModelToSave.CurrentHoistWayData != null)
+            {
+                if (viewModelToSave.CurrentHoistWayData.JobID != 0)
+                {
+                    HoistWayData hoistway = HoistWayDatas.FirstOrDefault(j => j.JobID == viewModelToSave.CurrentHoistWayData.JobID);
+                    if (hoistway == null)
+                    {
+                        SaveHoistWayData(viewModelToSave.CurrentHoistWayData);
+                    }
+                    else
+                    {
+                        viewModelToSave.CurrentHoistWayData.HoistWayDataID = hoistway.HoistWayDataID;
+                        SaveHoistWayData(viewModelToSave.CurrentHoistWayData);
+                    }
+                }
+            }
         }
     }
 }

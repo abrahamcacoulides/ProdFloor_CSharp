@@ -1,132 +1,158 @@
-﻿@model Indicators
-@{ }
-<form asp-action="NextIndicators" method="post">
-    <input type="hidden" asp-for="JobID" />
-    <input type="hidden" asp-for="IndicatorsID" />
-    <div class="form-row col-sm-10">
-        <div class="input-group col-5 text-center">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="">Car Calls</span>
-            </div>
-            <div><span asp-validation-for="CarCallsVoltage" class="text-danger"></span></div>
-            <indicators select-for="Volts_Value" selected-value="@Model.CarCallsVoltage.ToString()" asp-for="CarCallsVoltage" class="form-control col-sm-7"></indicators>
-            <div><span asp-validation-for="CarCallsVoltageType " class="text-danger"></span></div>
-            <indicators select-for="Volts_Type" selected-value="@Model.CarCallsVoltageType" asp-for="CarCallsVoltageType" class="form-control col-sm-7"></indicators>
-            <div><span asp-validation-for="CarCallsType" class="text-danger"></span></div>
-            <indicators select-for="CallType" selected-value="@Model.CarCallsType" asp-for="CarCallsType" class="form-control col-sm-7"></indicators>
+﻿@model JobViewModel
+<input type="hidden" asp-for="CurrentIndicator.JobID" />
+<input type="hidden" asp-for="CurrentIndicator.IndicatorID" />
+<h2 class="col-sm-10">
+    Calls
+</h2>
+<div class="form-row col-sm-14" style="padding-bottom:20px">
+    <div class="input-group col-5 text-center">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="">Car Calls</span>
         </div>
-        <div class="input-group col-5 text-center">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="">Hall Calls</span>
-            </div>
-            <div><span asp-validation-for="HallCallsVoltage" class="text-danger"></span></div>
-            <input asp-for="HallCallsVoltage" class="form-control col-sm-7" />
-            <div><span asp-validation-for="HallCallsVoltageType " class="text-danger"></span></div>
-            <input asp-for="HallCallsVoltageType " class="form-control col-sm-7" />
-            <div><span asp-validation-for="HallCallsType" class="text-danger"></span></div>
-            <input asp-for="HallCallsType" class="form-control col-sm-7" />
+        <div><span asp-validation-for="CurrentIndicator.CarCallsVoltage" class="text-danger"></span></div>
+        <indicators select-for="Volts_Value" selected-value="@Model.CurrentIndicator.CarCallsVoltage" asp-for="CurrentIndicator.CarCallsVoltage" class="form-control col-sm-7"></indicators>
+        <div><span asp-validation-for="CurrentIndicator.CarCallsVoltageType " class="text-danger"></span></div>
+        <indicators select-for="Volts_Type" selected-value="@Model.CurrentIndicator.CarCallsVoltageType" asp-for="CurrentIndicator.CarCallsVoltageType" class="form-control col-sm-7"></indicators>
+        <div><span asp-validation-for="CurrentIndicator.CarCallsType" class="text-danger"></span></div>
+        <indicators select-for="CallType" selected-value="@Model.CurrentIndicator.CarCallsType" asp-for="CurrentIndicator.CarCallsType" class="form-control col-sm-7"></indicators>
+    </div>
+    <div class="input-group col-5 text-center">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="">Hall Calls</span>
+        </div>
+        <div><span asp-validation-for="CurrentIndicator.HallCallsVoltage" class="text-danger"></span></div>
+        <indicators select-for="Volts_Value" selected-value="@Model.CurrentIndicator.HallCallsVoltage" asp-for="CurrentIndicator.HallCallsVoltage" class="form-control col-sm-7"></indicators>
+        <div><span asp-validation-for="CurrentIndicator.HallCallsVoltageType " class="text-danger"></span></div>
+        <indicators select-for="Volts_Type" selected-value="@Model.CurrentIndicator.HallCallsVoltageType" asp-for="CurrentIndicator.HallCallsVoltageType" class="form-control col-sm-7"></indicators>
+        <div><span asp-validation-for="CurrentIndicator.HallCallsType" class="text-danger"></span></div>
+        <indicators select-for="CallType" selected-value="@Model.CurrentIndicator.HallCallsType" asp-for="CurrentIndicator.HallCallsType" class="form-control col-sm-7"></indicators>
+    </div>
+</div>
+<h2 class="col-sm-10">
+    Position Indicators
+</h2>
+<div class="form-row col-sm-14" style="padding-bottom:20px">
+    <div class="input-group col-5 text-center" style="padding-bottom:5px">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="">Car PI</span>
+        </div>
+        <div><span asp-validation-for="CurrentIndicator.CarPI" class="text-danger"></span></div>
+        <div class="input-group-text">
+            <input asp-for="CurrentIndicator.CarPI" />
+        </div>
+        <div><span asp-validation-for="CurrentIndicator.CarPIType" class="text-danger"></span></div>
+        <indicators select-for="PIDriver" selected-value="@Model.CurrentIndicator.CarPIType" asp-for="CurrentIndicator.CarPIType" class="form-control col-sm-4"></indicators>
+        <div><span asp-validation-for="CurrentIndicator.CarPIDiscreteVoltage" class="text-danger"></span></div>
+        <indicators select-for="Volts_Value" selected-value="@Model.CurrentIndicator.CarPIDiscreteVoltage" asp-for="CurrentIndicator.CarPIDiscreteVoltage" class="form-control col-sm-4"></indicators>
+        <div><span asp-validation-for="CurrentIndicator.HallCallsVoltageType " class="text-danger"></span></div>
+        <indicators select-for="Volts_Type" selected-value="@Model.CurrentIndicator.CarPIDiscreteVoltageType" asp-for="CurrentIndicator.CarPIDiscreteVoltageType" class="form-control col-sm-4"></indicators>
+    </div>
+    <div class="input-group col-5 text-center" style="padding-bottom:5px">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="">Hall PI</span>
+        </div>
+        <div><span asp-validation-for="CurrentIndicator.HallPI" class="text-danger"></span></div>
+        <div class="input-group-text">
+            <input asp-for="CurrentIndicator.HallPI" />
+        </div>
+        <div><span asp-validation-for="CurrentIndicator.HallPIType" class="text-danger"></span></div>
+        <indicators select-for="PIDriver" selected-value="@Model.CurrentIndicator.HallPIType" asp-for="CurrentIndicator.HallPIType" class="form-control col-sm-4"></indicators>
+        <div><span asp-validation-for="CurrentIndicator.HallPIDiscreteVoltage" class="text-danger"></span></div>
+        <indicators select-for="Volts_Value" selected-value="@Model.CurrentIndicator.HallPIDiscreteVoltage" asp-for="CurrentIndicator.HallPIDiscreteVoltage" class="form-control col-sm-4"></indicators>
+        <div><span asp-validation-for="CurrentIndicator.HallCallsVoltageType " class="text-danger"></span></div>
+        <indicators select-for="Volts_Type" selected-value="@Model.CurrentIndicator.HallPIDiscreteVoltageType" asp-for="CurrentIndicator.HallPIDiscreteVoltageType" class="form-control col-sm-4"></indicators>
+    </div>
+    <div class="input-group col-5 text-center">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="">Voice Annunciation</span>
+        </div>
+        <div><span asp-validation-for="CurrentIndicator.VoiceAnnunciationPI" class="text-danger"></span></div>
+        <div class="input-group-text">
+            <input asp-for="CurrentIndicator.VoiceAnnunciationPI" />
+        </div>
+        <div><span asp-validation-for="CurrentIndicator.VoiceAnnunciationPIType" class="text-danger"></span></div>
+        <indicators select-for="PIDriver" selected-value="@Model.CurrentIndicator.VoiceAnnunciationPIType" asp-for="CurrentIndicator.VoiceAnnunciationPIType" class="form-control col-sm-4"></indicators>
+    </div>
+</div>
+<h2 class="col-sm-10">
+    Lanterns
+</h2>
+<div class="form-row col-sm-14" style="padding-bottom:20px">
+    <div class="input-group col-5 text-center" style="padding-bottom:5px">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="">Car Lanterns</span>
+        </div>
+        <div><span asp-validation-for="CurrentIndicator.CarLanterns" class="text-danger"></span></div>
+        <div class="input-group-text">
+            <input asp-for="CurrentIndicator.CarLanterns" />
+        </div>
+        <div><span asp-validation-for="CurrentIndicator.PassingFloorType" class="text-danger"></span></div>
+        <indicators select-for="PIDriver" selected-value="@Model.CurrentIndicator.PassingFloorType" asp-for="CurrentIndicator.PassingFloorType" class="form-control col-sm-4"></indicators>
+    </div>
+    <div class="input-group col-5 text-center" style="padding-bottom:5px">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="">Hall Lanterns</span>
+        </div>
+        <div><span asp-validation-for="CurrentIndicator.HallLanterns" class="text-danger"></span></div>
+        <div class="input-group-text">
+            <input asp-for="CurrentIndicator.HallLanterns" />
+        </div>
+        <div><span asp-validation-for="CurrentIndicator.PassingFloorType" class="text-danger"></span></div>
+        <indicators select-for="PIDriver" selected-value="@Model.CurrentIndicator.PassingFloorType" asp-for="CurrentIndicator.PassingFloorType" class="form-control col-sm-4"></indicators>
+    </div>
+    <div class="input-group col-5 text-center" style="padding-bottom:5px" id="discrete-car-lanterns">
+        <div><span asp-validation-for="CurrentIndicator.CarLanternsVoltage" class="text-danger"></span></div>
+        <indicators select-for="Volts_Value" selected-value="@Model.CurrentIndicator.CarLanternsVoltage" asp-for="CurrentIndicator.CarLanternsVoltage" class="form-control col-sm-4"></indicators>
+        <div><span asp-validation-for="CurrentIndicator.CarLanternsVoltageType" class="text-danger"></span></div>
+        <indicators select-for="Volts_Type" selected-value="@Model.CurrentIndicator.CarLanternsVoltageType" asp-for="CurrentIndicator.CarLanternsVoltageType" class="form-control col-sm-4"></indicators>
+        <div><span asp-validation-for="CurrentIndicator.CarLanternsType" class="text-danger"></span></div>
+        <indicators select-for="PIType" selected-value="@Model.CurrentIndicator.CarLanternsType" asp-for="CurrentIndicator.CarLanternsType" class="form-control col-sm-4"></indicators>
+    </div>
+    <div class="input-group col-5 text-center" style="padding-bottom:5px" id="discrete-hall-lanterns">
+        <div><span asp-validation-for="CurrentIndicator.HallLanternsVoltage" class="text-danger"></span></div>
+        <indicators select-for="Volts_Value" selected-value="@Model.CurrentIndicator.HallLanternsVoltage" asp-for="CurrentIndicator.HallLanternsVoltage" class="form-control col-sm-4"></indicators>
+        <div><span asp-validation-for="CurrentIndicator.HallLanternsVoltageType" class="text-danger"></span></div>
+        <indicators select-for="Volts_Type" selected-value="@Model.CurrentIndicator.HallLanternsVoltageType" asp-for="CurrentIndicator.HallLanternsVoltageType" class="form-control col-sm-4"></indicators>
+        <div><span asp-validation-for="CurrentIndicator.HallLanternsType" class="text-danger"></span></div>
+        <indicators select-for="PIType" selected-value="@Model.CurrentIndicator.HallLanternsType" asp-for="CurrentIndicator.HallLanternsType" class="form-control col-sm-4"></indicators>
+    </div>
+    <div class="input-group col-10 text-left" style="padding-bottom:5px">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="">Passing Floor</span>
+        </div>
+        <div><span asp-validation-for="CurrentIndicator.PassingFloor" class="text-danger"></span></div>
+        <div class="input-group-text">
+            <input asp-for="CurrentIndicator.PassingFloor" />
+        </div>
+        <div><span asp-validation-for="CurrentIndicator.PassingFloorType" class="text-danger"></span></div>
+        <indicators select-for="PIDriver" selected-value="@Model.CurrentIndicator.PassingFloorType" asp-for="CurrentIndicator.PassingFloorType" class="form-control col-sm-4"></indicators>
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="">Passing Floor Enable</span>
+        </div>
+        <div class="input-group-text">
+            <input asp-for="CurrentIndicator.PassingFloorEnable" />
         </div>
     </div>
-    @*<div class="form-row col-sm-10">
-            Grid for checkboxes
-            <div class="form-group col-3 text-center">
-                <label asp-for="StatusIndicatorsList" class="col-form-label"></label>
-                <div><span asp-validation-for="FRON2" class="text-danger"></span></div>
-                <input asp-for="FRON2" class="form-control" />
-            </div>
-            <div class="form-group col-3 text-center">
-                <label asp-for="Attendant" class="col-form-label text-center"></label>
-                <div><span asp-validation-for="Attendant" class="text-danger"></span></div>
-                <input asp-for="Attendant" class="form-control" />
-            </div>
-            <div class="form-group col-3 text-center">
-                <label asp-for="CarToLobby" class="col-form-label"></label>
-                <div><span asp-validation-for="CarToLobby" class="text-danger"></span></div>
-                <input asp-for="CarToLobby" class="form-control" />
-            </div>
-            <div class="form-group col-3 text-center">
-                <label asp-for="EQ" class="col-form-label"></label>
-                <div><span asp-validation-for="EQ" class="text-danger"></span></div>
-                <input asp-for="EQ" class="form-control " />
-            </div>
-            <div class="form-group col-3 text-center">
-                <label asp-for="EMT" class="col-form-label"></label>
-                <div><span asp-validation-for="EMT" class="text-danger"></span></div>
-                <input asp-for="EMT" class="form-control" />
-            </div>
-            <div class="form-group col-3 text-center">
-                <label asp-for="EP" class="col-form-label"></label>
-                <div><span asp-validation-for="EP" class="text-danger"></span></div>
-                <input asp-for="EP" class="form-control" />
-            </div>
-            <div class="form-group col-3 text-center">
-                <label asp-for="FLO" class="col-form-label"></label>
-                <div><span asp-validation-for="FLO" class="text-danger"></span></div>
-                <input asp-for="FLO" class="form-control" />
-            </div>
-            <div class="form-group col-3 text-center">
-                <label asp-for="Hosp" class="col-form-label"></label>
-                <div><span asp-validation-for="Hosp" class="text-danger"></span></div>
-                <input asp-for="Hosp" class="form-control" />
-            </div>
-            <div class="form-group col-3 text-center">
-                <label asp-for="Ind" class="col-form-label"></label>
-                <div><span asp-validation-for="Ind" class="text-danger"></span></div>
-                <input asp-for="Ind" class="form-control" />
-            </div>
-            <div class="form-group col-3 text-center">
-                <label asp-for="LoadWeigher" class="col-form-label"></label>
-                <div><span asp-validation-for="LoadWeigher" class="text-danger"></span></div>
-                <input asp-for="LoadWeigher" class="form-control" />
-            </div>
-            <div class="form-group col-3 text-center">
-                <label asp-for="INA" class="col-form-label"></label>
-                <div><span asp-validation-for="INA" class="text-danger"></span></div>
-                <input asp-for="INA" class="form-control" />
-            </div>
-            <div class="form-group col-3 text-center">
-                <label asp-for="INCP" class="col-form-label"></label>
-                <div><span asp-validation-for="INCP" class="text-danger"></span></div>
-                <input asp-for="INCP" class="form-control" />
-            </div>
-            <div class="form-group col-3 text-center">
-                <label asp-for="SwitchStyle" class="col-form-label"></label>
-                <div><span asp-validation-for="SwitchStyle" class="text-danger"></span></div>
-                <custom-select select-for="SwitchStyle" selected-value="@Model.SwitchStyle" asp-for="SwitchStyle"></custom-select>
-            </div>
-            <div class="form-group col-3 text-center">
-                <label asp-for="MView" class="col-form-label"></label>
-                <div><span asp-validation-for="MView" class="text-danger"></span></div>
-                <input asp-for="MView" class="form-control" />
-            </div>
-            <div class="form-group col-3 text-center">
-                <label asp-for="IMon" class="col-form-label"></label>
-                <div><span asp-validation-for="IMon" class="text-danger"></span></div>
-                <input asp-for="IMon" class="form-control" />
-            </div>
-            <div class="form-group col-3 text-center">
-                <label asp-for="IDS" class="col-form-label"></label>
-                <div><span asp-validation-for="IDS" class="text-danger"></span></div>
-                <input asp-for="IDS" class="form-control" />
-            </div>
-            <div class="form-group col-3 text-center">
-                <label asp-for="CallEnable" class="col-form-label"></label>
-                <div><span asp-validation-for="CallEnable" class="text-danger"></span></div>
-                <input asp-for="CallEnable" class="form-control" />
-            </div>
-            <div class="form-group col-3 text-center">
-                <label asp-for="CarCallCodeSecurity" class="col-form-label"></label>
-                <div><span asp-validation-for="CarCallCodeSecurity" class="text-danger"></span></div>
-                <input asp-for="CarCallCodeSecurity" class="form-control" />
-            </div>
-            <div class="form-group col-3 text-center">
-                <label asp-for="SpecialInstructions" class="col-form-label"></label>
-                <div><span asp-validation-for="SpecialInstructions" class="text-danger"></span></div>
-                <input asp-for="SpecialInstructions" class="form-control" />
-            </div>
-        </div>*@
-    <div class="text-center">
-        <button class="btn btn-primary" type="submit">Save</button>
-        <a asp-action="List" class="btn btn-secondary">Cancel</a>
+    <div class="input-group col-10 text-left" style="padding-bottom:5px" id="discrete-hall-lanterns">
+        <div><span asp-validation-for="CurrentIndicator.PassingFloorDiscreteVoltage" class="text-danger"></span></div>
+        <indicators select-for="Volts_Value" selected-value="@Model.CurrentIndicator.PassingFloorDiscreteVoltage" asp-for="CurrentIndicator.PassingFloorDiscreteVoltage" class="form-control col-sm-2"></indicators>
+        <div><span asp-validation-for="CurrentIndicator.PassingFloorDiscreteVoltageType" class="text-danger"></span></div>
+        <indicators select-for="Volts_Type" selected-value="@Model.CurrentIndicator.PassingFloorDiscreteVoltageType" asp-for="CurrentIndicator.PassingFloorDiscreteVoltageType" class="form-control col-sm-2"></indicators>
+        <div><span asp-validation-for="CurrentIndicator.PassingFloorDiscreteType" class="text-danger"></span></div>
+        <indicators select-for="PIType" selected-value="@Model.CurrentIndicator.PassingFloorDiscreteType" asp-for="CurrentIndicator.PassingFloorDiscreteType" class="form-control col-sm-2"></indicators>
     </div>
-</form>
+</div>
+<h2 class="col-sm-10">
+    Status Indicators
+</h2>
+<div class="form-row col-sm-14" style="padding-bottom:20px">
+    <div class="input-group col-5 text-center">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="">Voltage</span>
+        </div>
+        <div><span asp-validation-for="CurrentIndicator.IndicatorsVoltage" class="text-danger"></span></div>
+        <indicators select-for="Volts_Value" selected-value="@Model.CurrentIndicator.IndicatorsVoltage" asp-for="CurrentIndicator.IndicatorsVoltage" class="form-control col-sm-7"></indicators>
+        <div><span asp-validation-for="CurrentIndicator.IndicatorsVoltageType " class="text-danger"></span></div>
+        <indicators select-for="Volts_Type" selected-value="@Model.CurrentIndicator.IndicatorsVoltageType" asp-for="CurrentIndicator.IndicatorsVoltageType" class="form-control col-sm-7"></indicators>
+    </div>
+</div>

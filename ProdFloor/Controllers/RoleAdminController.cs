@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using ProdFloor.Models;
 using ProdFloor.Models.ViewModels;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ProdFloor.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class RoleAdminController : Controller
     {
         private RoleManager<IdentityRole> roleManager;

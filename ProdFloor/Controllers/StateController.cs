@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ProdFloor.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class StateController : Controller
     {
         private IItemRepository repository;
@@ -20,7 +21,6 @@ namespace ProdFloor.Controllers
 
         }
 
-        [Authorize]
         public ViewResult List(string country, int page = 1)
             => View(new StateListViewModel
             {
@@ -47,7 +47,6 @@ namespace ProdFloor.Controllers
             return View(repository.States
                 .FirstOrDefault(j => j.StateID == ID));
         }
-                    
 
         [HttpPost]
         public IActionResult Edit(State state)

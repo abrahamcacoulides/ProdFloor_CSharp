@@ -17,6 +17,10 @@ namespace ProdFloor.Models
 
         public DbSet<GenericFeatures> GenericFeaturesList { get; set; }
 
+        public DbSet<Indicator> Indicators { get; set; }
+
+        public DbSet<HoistWayData> HoistWayDatas { get; set; }
+
         public DbSet<Country> Countries { get; set; }
 
         public DbSet<State> States { get; set; }

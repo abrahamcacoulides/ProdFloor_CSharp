@@ -7,6 +7,7 @@ using System.Collections.Generic;
 
 namespace ProdFloor.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CountryController : Controller
     {
         private IItemRepository repository;
@@ -16,8 +17,7 @@ namespace ProdFloor.Controllers
         {
             repository = repo;
         }
-
-        [Authorize]
+        
         public ViewResult List(int page = 1)
             => View(new CountryListViewModel
             {

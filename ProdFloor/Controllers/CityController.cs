@@ -9,6 +9,7 @@ using System.Collections.Generic;
 
 namespace ProdFloor.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CityController : Controller
     {
         private IItemRepository repository;
@@ -19,8 +20,7 @@ namespace ProdFloor.Controllers
             repository = repo;
 
         }
-
-        [Authorize]
+        
         public ViewResult List(string separator, int page = 1)
             => View(new CityListViewModel
             {
