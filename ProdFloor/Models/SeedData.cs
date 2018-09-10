@@ -29,6 +29,8 @@ namespace ProdFloor.Models
                         SafetyCode = "ASME A17.1-2007/CSA B44-07",
                         JobType = "M2000",
                         Contractor = "Contractor 1",
+                        EngID = 97,
+                        Status = "Incomplete",
                         ShipDate = new DateTime(2017,12,28)
                     },
                     new Job
@@ -43,6 +45,8 @@ namespace ProdFloor.Models
                         SafetyCode = "ASME A17.1-2004 w/CA TITLE 8,GROUP IV",
                         JobType = "M4000",
                         Contractor = "Contractor 2",
+                        EngID = 99,
+                        Status = "Incomplete",
                         ShipDate = new DateTime(2017, 12, 12)
                     },
                     new Job
@@ -57,6 +61,8 @@ namespace ProdFloor.Models
                         SafetyCode = "ASME A17.1-2004 w/CA TITLE 8,GROUP IV ",
                         JobType = "ELEM",
                         Contractor = "Contractor 1",
+                        EngID = 27,
+                        Status = "Incomplete",
                         ShipDate = new DateTime(2017, 11, 13)
                     },
                     new Job
@@ -71,6 +77,8 @@ namespace ProdFloor.Models
                         SafetyCode = "ASME A17.1-2004 w/CA TITLE 8,GROUP IV ",
                         JobType = "M2000",
                         Contractor = "Contractor 6",
+                        EngID = 27,
+                        Status = "Incomplete",
                         ShipDate = new DateTime(2018, 1, 26)
                     }
                     );
@@ -112,6 +120,12 @@ namespace ProdFloor.Models
                         Style = "Automatic",
                         Brand = "MCE",
                         Name = "SmarTraq Complete"
+                    }, 
+                    new DoorOperator
+                    {
+                        Style = "Manual",
+                        Brand = "Manual",
+                        Name = "Manual"
                     },
                     new DoorOperator
                     {

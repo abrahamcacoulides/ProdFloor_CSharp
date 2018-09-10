@@ -14,6 +14,8 @@ namespace ProdFloor.Models.ViewModels
 
         [Required]
         public string Password { get; set; }
+
+        public int EngineerID { get; set; }
     }
 
     public class RoleEditModel

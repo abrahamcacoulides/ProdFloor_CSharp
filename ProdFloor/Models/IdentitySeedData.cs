@@ -19,6 +19,15 @@ namespace ProdFloor.Models
                 user = new AppUser { UserName = adminUser};
                 await userManager.CreateAsync(user, adminPassword);
             }
+            RoleManager<IdentityRole> roleManager = app.ApplicationServices.GetRequiredService<RoleManager<IdentityRole>>();
+            IdentityRole role = await roleManager.FindByNameAsync("Admin");
+            if(role == null)
+            {
+                role = new IdentityRole { Name = "Admin" };
+                await roleManager.CreateAsync(role);
+                await userManager.AddToRoleAsync(user, role.Name);
+            }
+            
         }
     }
 }

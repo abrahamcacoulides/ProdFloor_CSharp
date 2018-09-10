@@ -11,9 +11,10 @@ using System;
 namespace ProdFloor.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180521204336_MeetingUpdate")]
+    partial class MeetingUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,7 +114,7 @@ namespace ProdFloor.Migrations
 
                     b.Property<bool>("EPOtherCars");
 
-                    b.Property<bool>("EPSelect");
+                    b.Property<string>("EPSelect");
 
                     b.Property<bool>("EPVoltage");
 
@@ -147,7 +148,7 @@ namespace ProdFloor.Migrations
 
                     b.Property<string>("Monitoring");
 
-                    b.Property<bool>("PTI");
+                    b.Property<string>("PTI");
 
                     b.Property<bool>("Roped");
 

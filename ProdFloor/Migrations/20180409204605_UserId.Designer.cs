@@ -11,9 +11,10 @@ using System;
 namespace ProdFloor.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180409204605_UserId")]
+    partial class UserId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,13 +86,7 @@ namespace ProdFloor.Migrations
 
                     b.Property<bool>("Attendant");
 
-                    b.Property<bool>("BottomAccess");
-
-                    b.Property<string>("BottomAccessLocation");
-
                     b.Property<bool>("CRO");
-
-                    b.Property<bool>("CTINSPST");
 
                     b.Property<bool>("CallEnable");
 
@@ -107,23 +102,11 @@ namespace ProdFloor.Migrations
 
                     b.Property<bool>("EP");
 
-                    b.Property<string>("EPCarsNumber");
-
-                    b.Property<string>("EPContact");
-
-                    b.Property<bool>("EPOtherCars");
-
-                    b.Property<bool>("EPSelect");
-
-                    b.Property<bool>("EPVoltage");
-
                     b.Property<bool>("EQ");
 
                     b.Property<bool>("FLO");
 
                     b.Property<bool>("FRON2");
-
-                    b.Property<string>("GovModel");
 
                     b.Property<bool>("HCRO");
 
@@ -133,11 +116,13 @@ namespace ProdFloor.Migrations
 
                     b.Property<bool>("Hosp");
 
+                    b.Property<bool>("IDS");
+
+                    b.Property<bool>("IMon");
+
                     b.Property<bool>("INA");
 
                     b.Property<bool>("INCP");
-
-                    b.Property<string>("INCPButtons");
 
                     b.Property<bool>("Ind");
 
@@ -145,19 +130,11 @@ namespace ProdFloor.Migrations
 
                     b.Property<bool>("LoadWeigher");
 
-                    b.Property<string>("Monitoring");
-
-                    b.Property<bool>("PTI");
-
-                    b.Property<bool>("Roped");
+                    b.Property<bool>("MView");
 
                     b.Property<string>("SpecialInstructions");
 
                     b.Property<string>("SwitchStyle");
-
-                    b.Property<bool>("TopAccess");
-
-                    b.Property<string>("TopAccessLocation");
 
                     b.HasKey("GenericFeaturesID");
 
@@ -322,13 +299,19 @@ namespace ProdFloor.Migrations
 
                     b.Property<bool>("CarLanterns");
 
-                    b.Property<string>("CarLanternsStyle");
-
                     b.Property<string>("CarLanternsType");
+
+                    b.Property<string>("CarLanternsVoltage");
+
+                    b.Property<string>("CarLanternsVoltageType");
 
                     b.Property<bool>("CarPI");
 
                     b.Property<string>("CarPIDiscreteType");
+
+                    b.Property<string>("CarPIDiscreteVoltage");
+
+                    b.Property<string>("CarPIDiscreteVoltageType");
 
                     b.Property<string>("CarPIType");
 
@@ -343,13 +326,19 @@ namespace ProdFloor.Migrations
 
                     b.Property<bool>("HallLanterns");
 
-                    b.Property<string>("HallLanternsStyle");
-
                     b.Property<string>("HallLanternsType");
+
+                    b.Property<string>("HallLanternsVoltage");
+
+                    b.Property<string>("HallLanternsVoltageType");
 
                     b.Property<bool>("HallPI");
 
                     b.Property<string>("HallPIDiscreteType");
+
+                    b.Property<string>("HallPIDiscreteVoltage");
+
+                    b.Property<string>("HallPIDiscreteVoltageType");
 
                     b.Property<string>("HallPIType");
 
@@ -364,6 +353,10 @@ namespace ProdFloor.Migrations
                     b.Property<bool>("PassingFloor");
 
                     b.Property<string>("PassingFloorDiscreteType");
+
+                    b.Property<string>("PassingFloorDiscreteVoltage");
+
+                    b.Property<string>("PassingFloorDiscreteVoltageType");
 
                     b.Property<bool>("PassingFloorEnable");
 

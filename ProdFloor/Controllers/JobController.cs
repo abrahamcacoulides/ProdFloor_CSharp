@@ -5,6 +5,8 @@ using System.Linq;
 using Microsoft.AspNetCore.Authorization;
 using System.Collections.Generic;
 using System;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
 
 namespace ProdFloor.Controllers
 {
@@ -13,12 +15,14 @@ namespace ProdFloor.Controllers
     {
         private IJobRepository repository;
         private IItemRepository itemsrepository;
+        private UserManager<AppUser> userManager;
         public int PageSize = 4;
 
-        public JobController(IJobRepository repo,IItemRepository itemsrepo)
+        public JobController(IJobRepository repo,IItemRepository itemsrepo, UserManager<AppUser> userMgr)
         {
             repository = repo;
             itemsrepository = itemsrepo;
+            userManager = userMgr;
         }
         
         public ViewResult List(string jobType, int jobPage = 1)
@@ -51,6 +55,7 @@ namespace ProdFloor.Controllers
             }
             else
             {
+                TempData["alert"] = $"alert-danger";
                 TempData["message"] = $"There was an error with your request";
             }
             return RedirectToAction("List");
@@ -61,8 +66,11 @@ namespace ProdFloor.Controllers
         [HttpPost]
         public IActionResult NewJob(Job newJob)
         {
+            AppUser currentUser = GetCurrentUser().Result;
             if (ModelState.IsValid)
             {
+                newJob.EngID = currentUser.EngID;
+                newJob.Status = "Incomplete";
                 repository.SaveJob(newJob);
                 JobViewModel newJobViewModel = new JobViewModel
                 {
@@ -74,11 +82,13 @@ namespace ProdFloor.Controllers
                     CurrentHoistWayData = new HoistWayData (),
                     CurrentTab = "Extension"
                 };
-                TempData["message"] = $"Job# {newJobViewModel.CurrentJob.JobNum} has been saved...{newJobViewModel.CurrentJob.JobID}";
+                TempData["message"] = $"Job# {newJobViewModel.CurrentJob.JobNum} has been saved...{newJobViewModel.CurrentJob.JobID}...{currentUser.EngID}";
                 return View("NextForm", newJobViewModel);
             }
             else
             {
+                TempData["message"] = $"There seems to be errors in the form. Please validate....{currentUser.EngID}";
+                TempData["alert"] = $"alert-danger";
                 return View(newJob);
             }
         }
@@ -88,7 +98,7 @@ namespace ProdFloor.Controllers
             Job job = repository.Jobs.FirstOrDefault(j => j.JobID == ID);
             if (job == null)
             {
-                TempData["message"] = $"The requested Job doesn't exist";
+                TempData["message"] = $"The requested Job doesn't exist.";
                 return RedirectToAction("List");
             }
             else
@@ -111,6 +121,10 @@ namespace ProdFloor.Controllers
         {
             if (ModelState.IsValid)
             {
+                if(multiEditViewModel.CurrentJob.Status == "" || multiEditViewModel.CurrentJob.Status == null)
+                {
+                    multiEditViewModel.CurrentJob.Status = "Working on it";
+                }
                 repository.SaveEngJobView(multiEditViewModel);
                 multiEditViewModel.CurrentTab = "Main";
                 TempData["message"] = $"{multiEditViewModel.CurrentJob.JobNum} ID has been saved...{multiEditViewModel.CurrentJob.JobID}";
@@ -119,7 +133,30 @@ namespace ProdFloor.Controllers
             else
             {
                 // there is something wrong with the data values
+                TempData["message"] = $"There seems to be errors in the form. Please validate.";
+                TempData["alert"] = $"alert-danger";
                 return View(multiEditViewModel);
+            }
+        }
+
+        public IActionResult Continue(int ID)
+        {
+            if(repository.Jobs.FirstOrDefault(j => j.JobID == ID) != null)
+            {
+                JobViewModel continueJobViewModel = new JobViewModel();
+                continueJobViewModel.CurrentJob = repository.Jobs.FirstOrDefault(j => j.JobID == ID);
+                continueJobViewModel.CurrentJobExtension = (repository.JobsExtensions.FirstOrDefault(j => j.JobID == ID) ?? new JobExtension());
+                continueJobViewModel.CurrentHydroSpecific = (repository.HydroSpecifics.FirstOrDefault(j => j.JobID == ID) ?? new HydroSpecific());
+                continueJobViewModel.CurrentGenericFeatures = (repository.GenericFeaturesList.FirstOrDefault(j => j.JobID == ID) ?? new GenericFeatures());
+                continueJobViewModel.CurrentIndicator = (repository.Indicators.FirstOrDefault(j => j.JobID == ID) ?? new Indicator());
+                continueJobViewModel.CurrentHoistWayData = (repository.HoistWayDatas.FirstOrDefault(j => j.JobID == ID) ?? new HoistWayData());
+                return View("NextForm", continueJobViewModel);
+
+            }
+            else
+            {
+                TempData["message"] = $"The requested Job Id# {ID} doesn't exist";
+                return RedirectToAction("List");
             }
         }
 
@@ -138,6 +175,7 @@ namespace ProdFloor.Controllers
                             {
                                 if (nextViewModel.CurrentHoistWayData != null)
                                 {
+                                    nextViewModel.CurrentJob.Status = "Working on it";
                                     repository.SaveEngJobView(nextViewModel);
                                     nextViewModel.CurrentTab = "Main";
                                     TempData["message"] = $"everything was saved";
@@ -191,8 +229,8 @@ namespace ProdFloor.Controllers
                 {
                     repository.SaveEngJobView(nextViewModel);
                     JobExtension jobExt = repository.JobsExtensions.FirstOrDefault(j => j.JobID == nextViewModel.CurrentJob.JobID);
-                    nextViewModel.CurrentJobExtension = jobExt;
-                    nextViewModel.CurrentHydroSpecific = new HydroSpecific { JobID = nextViewModel.CurrentJob.JobID };
+                    nextViewModel.CurrentJobExtension = (jobExt ?? new JobExtension { JobID = nextViewModel.CurrentJob.JobID });
+                    nextViewModel.CurrentHydroSpecific = new HydroSpecific ();
                     nextViewModel.CurrentGenericFeatures = new GenericFeatures();
                     nextViewModel.CurrentIndicator = new Indicator();
                     nextViewModel.CurrentHoistWayData = new HoistWayData();
@@ -210,6 +248,13 @@ namespace ProdFloor.Controllers
                 TempData["message"] = $"nothing was saved";
                 return View(nextViewModel);
             }
+        }
+
+        private async Task<AppUser> GetCurrentUser()
+        {
+            AppUser user = await userManager.GetUserAsync(HttpContext.User);
+
+            return user;
         }
     }
 }

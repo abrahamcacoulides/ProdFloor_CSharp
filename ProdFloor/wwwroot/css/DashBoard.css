@@ -12,6 +12,11 @@ body {
  * Global add-ons
  */
 
+.input-validation-error {
+    border-color: red;
+    background-color: #fee;
+}
+
 .sub-header {
   padding-bottom: 10px;
   border-bottom: 1px solid #eee;
