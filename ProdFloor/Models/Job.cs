@@ -10,6 +10,8 @@ namespace ProdFloor.Models
     public class Job
     {
         public int JobID { get; set; }
+        public string Status { get; set; }
+        public int EngID { get; set; }
 
         [Required(ErrorMessage = "Please enter a name")]
         public string Name { get; set; }
@@ -23,7 +25,7 @@ namespace ProdFloor.Models
         public int JobNum { get; set; }
 
         [Display(Name = "PO #")]
-        [Range(3000000, 4000000, ErrorMessage = "Job number is out of range")]
+        [Range(3000000, 4900000, ErrorMessage = "Job number is out of range")]
         [Required(ErrorMessage = "Please enter a PO")]
         public int PO { get; set; }
 
@@ -217,27 +219,63 @@ namespace ProdFloor.Models
         public bool EQ { get; set; }
         [Display(Name = "EMT")]
         public bool EMT { get; set; }
+
+        //Emergency Power Options
         [Display(Name = "Emergency Power")]
-        public bool EP { get; set; }
+        public bool EP { get; set; }//*
+        [Display(Name = "Generator same as line voltage?")]
+        public bool EPVoltage { get; set; }//*
+        [Display(Name = "Does same generator power other cars?")]
+        public bool EPOtherCars { get; set; } //*
+        [Display(Name = "Number of cars to run at the same time?")]
+        public string EPCarsNumber { get; set; } //* 1,2,3,4+
+        [Display(Name = "EP contact during normal power?")]
+        public string EPContact { get; set; } //* NO or NC
+        [Display(Name = "Power pre transfer contact?")]
+        public bool PTI { get; set; } //* 
+        [Display(Name = "Manual Select Switch")]
+        public bool EPSelect { get; set; } //* 
+
+
         [Display(Name = "Fan/Light Timer Option")]
         public bool FLO { get; set; }
         [Display(Name = "Hospital")]
         public bool Hosp { get; set; }
         [Display(Name = "Independent")]
         public bool Ind { get; set; }
+
+        // Hoistway Access Options
         [Display(Name = "Hoistway Access")]
         public bool INA { get; set; }
+        [Display(Name = "Top Access Switch")] //*
+        public bool TopAccess { get; set; } //*
+        [Display(Name = "Top Access Switch Location")]//*
+        public string TopAccessLocation { get; set; } //* Front Or Rear
+        [Display(Name = "Bottom Access Switch")]//*
+        public bool BottomAccess { get; set; }//*
+        [Display(Name = "Bottom Access Switch Location")]//*
+        public string BottomAccessLocation { get; set; } //* Front Or Rear
+
+        // In-car Inspection Options
         [Display(Name = "In-Car Inspection")]
         public bool INCP { get; set; }
-        [Display(Name = "Load Weigher")]
-        public bool LoadWeigher { get; set; }
+        [Display(Name = "In-Car Inspection Buttons")] //*
+        public string INCPButtons { get; set; } //* Using car calls or up/down buttons
+
         [Display(Name = "Switch Style")]
         public string SwitchStyle { get; set; }
 
-        public bool MView { get; set; }
-        public bool IMon { get; set; }
-        [Display(Name = "IDS Lifnet Interface")]
-        public bool IDS { get; set; }
+        [Display(Name = "Load Weigher")]
+        public bool LoadWeigher { get; set; }
+        [Display(Name = "Cartop Inspection Station")]//*
+        public bool CTINSPST { get; set; }//*
+        [Display(Name = "Roped Hydro")]//*
+        public bool Roped { get; set; }//*
+        [Display(Name = "Roped Hydro Governor Model")]//*
+        public string GovModel { get; set; }//*
+
+        public string Monitoring { get; set; } //* "None", MView Complete, MView Interface, IMonitor Complete, IMonitor Interface, IDS Liftnet
+
         [Display(Name = "Security")]
         public bool CallEnable { get; set; }
         [Display(Name = "Car Card Reader")]
@@ -282,33 +320,25 @@ namespace ProdFloor.Models
 
         public bool CarPI { get; set; } // check if required
         public string CarPIType { get; set; } // CE, Emotive, Discrete
-        public string CarPIDiscreteVoltage { get; set; } //24,48,120
-        public string CarPIDiscreteVoltageType { get; set; } //AC, DC
         public string CarPIDiscreteType { get; set; } //Multi-light, One line, binary 00, binary 01
 
         public bool HallPI { get; set; } // check if required
         public string HallPIType { get; set; } // CE, Emotive, Discrete
-        public string HallPIDiscreteVoltage { get; set; } //24,48,120
-        public string HallPIDiscreteVoltageType { get; set; } //AC, DC
         public string HallPIDiscreteType { get; set; } //Multi-light, One line, binary 00, binary 01
 
         public bool VoiceAnnunciationPI { get; set; } // check if required
         public string VoiceAnnunciationPIType { get; set; } // CE, Emotive, Other
 
         public bool CarLanterns { get; set; } //check if required
-        public string CarLanternsVoltage { get; set; } //24,48,120
-        public string CarLanternsVoltageType { get; set; } //AC, DC
+        public string CarLanternsStyle { get; set; } // CE, Emotive, Discrete
         public string CarLanternsType { get; set; } //Chime, Gong
 
         public bool HallLanterns { get; set; } //check if required
-        public string HallLanternsVoltage { get; set; } //24,48,120
-        public string HallLanternsVoltageType { get; set; } //AC, DC
+        public string HallLanternsStyle { get; set; } // CE, Emotive, Discrete
         public string HallLanternsType { get; set; } //Chime, Gong
 
         public bool PassingFloor { get; set; } // check if required
         public string PassingFloorType { get; set; } // CE, Emotive, Discrete
-        public string PassingFloorDiscreteVoltage { get; set; } //24,48,120
-        public string PassingFloorDiscreteVoltageType { get; set; } //AC, DC
         public string PassingFloorDiscreteType { get; set; } //Chime, Gong
         public bool PassingFloorEnable { get; set; } // check if required
 

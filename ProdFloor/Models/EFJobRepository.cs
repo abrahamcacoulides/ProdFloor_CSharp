@@ -45,6 +45,8 @@ namespace ProdFloor.Models
                     dbEntry.JobState = job.JobState;
                     dbEntry.JobCity = job.JobCity;
                     dbEntry.SafetyCode = job.SafetyCode;
+                    dbEntry.Status = job.Status;
+                    dbEntry.EngID = job.EngID;
                 }
             }
             context.SaveChanges();
@@ -143,16 +145,28 @@ namespace ProdFloor.Models
                     dbEntry.EQ = dbEntry.EQ;
                     dbEntry.EMT = dbEntry.EMT;
                     dbEntry.EP = dbEntry.EP;
+                    dbEntry.EPVoltage = dbEntry.EPVoltage;
+                    dbEntry.EPOtherCars = dbEntry.EPOtherCars;
+                    dbEntry.EPCarsNumber = dbEntry.EPCarsNumber;
+                    dbEntry.EPContact = dbEntry.EPContact;
+                    dbEntry.PTI = dbEntry.PTI;
+                    dbEntry.EPSelect = dbEntry.EPSelect;
                     dbEntry.FLO = dbEntry.FLO;
                     dbEntry.Hosp = dbEntry.Hosp;
                     dbEntry.Ind = dbEntry.Ind;
                     dbEntry.INA = dbEntry.INA;
+                    dbEntry.TopAccess = dbEntry.TopAccess;
+                    dbEntry.TopAccessLocation = dbEntry.TopAccessLocation;
+                    dbEntry.BottomAccess = dbEntry.BottomAccess;
+                    dbEntry.BottomAccessLocation = dbEntry.BottomAccessLocation;
                     dbEntry.INCP = dbEntry.INCP;
+                    dbEntry.INCPButtons = dbEntry.INCPButtons;
+                    dbEntry.CTINSPST = dbEntry.CTINSPST;
+                    dbEntry.Roped = dbEntry.Roped;
+                    dbEntry.GovModel = dbEntry.GovModel;
                     dbEntry.LoadWeigher = dbEntry.LoadWeigher;
                     dbEntry.SwitchStyle = dbEntry.SwitchStyle;
-                    dbEntry.MView = dbEntry.MView;
-                    dbEntry.IMon = dbEntry.IMon;
-                    dbEntry.IDS = dbEntry.IDS;
+                    dbEntry.Monitoring = dbEntry.Monitoring;
                     dbEntry.CallEnable = dbEntry.CallEnable;
                     dbEntry.CarCallCodeSecurity = dbEntry.CarCallCodeSecurity;
                     dbEntry.SpecialInstructions = dbEntry.SpecialInstructions;
@@ -184,28 +198,20 @@ namespace ProdFloor.Models
                     dbEntry.HallCallsType = indicator.HallCallsType;
                     dbEntry.CarPI = indicator.CarPI;
                     dbEntry.CarPIType = indicator.CarPIType;
-                    dbEntry.CarPIDiscreteVoltage = indicator.CarPIDiscreteVoltage;
-                    dbEntry.CarPIDiscreteVoltageType = indicator.CarPIDiscreteVoltageType;
                     dbEntry.CarPIDiscreteType = indicator.CarPIDiscreteType;
                     dbEntry.HallPI = indicator.HallPI;
                     dbEntry.HallPIType = indicator.HallPIType;
-                    dbEntry.HallPIDiscreteVoltage = indicator.HallPIDiscreteVoltage;
-                    dbEntry.HallPIDiscreteVoltageType = indicator.HallPIDiscreteVoltageType;
                     dbEntry.HallPIDiscreteType = indicator.HallPIDiscreteType;
                     dbEntry.VoiceAnnunciationPI = indicator.VoiceAnnunciationPI;
                     dbEntry.VoiceAnnunciationPIType = indicator.VoiceAnnunciationPIType;
                     dbEntry.CarLanterns = indicator.CarLanterns;
-                    dbEntry.CarLanternsVoltage = indicator.CarLanternsVoltage;
-                    dbEntry.CarLanternsVoltageType = indicator.CarLanternsVoltageType;
+                    dbEntry.CarLanternsStyle = indicator.CarLanternsStyle;
                     dbEntry.CarLanternsType = indicator.CarLanternsType;
                     dbEntry.HallLanterns = indicator.HallLanterns;
-                    dbEntry.HallLanternsVoltage = indicator.HallLanternsVoltage;
-                    dbEntry.HallLanternsVoltageType = indicator.HallLanternsVoltageType;
+                    dbEntry.HallLanternsStyle = indicator.HallLanternsStyle;
                     dbEntry.HallLanternsType = indicator.HallLanternsType;
                     dbEntry.PassingFloor = indicator.PassingFloor;
                     dbEntry.PassingFloorType = indicator.PassingFloorType;
-                    dbEntry.PassingFloorDiscreteVoltage = indicator.PassingFloorDiscreteVoltage;
-                    dbEntry.PassingFloorDiscreteVoltageType = indicator.PassingFloorDiscreteVoltageType;
                     dbEntry.PassingFloorDiscreteType = indicator.PassingFloorDiscreteType;
                     dbEntry.PassingFloorEnable = indicator.PassingFloorEnable;
                     dbEntry.IndicatorsVoltage = indicator.IndicatorsVoltage;
@@ -386,17 +392,20 @@ namespace ProdFloor.Models
         public void SaveEngJobView(JobViewModel viewModelToSave)
         {
             SaveJob(viewModelToSave.CurrentJob);
-            if (viewModelToSave.CurrentJobExtension.JobID != 0)
+            if (viewModelToSave.CurrentJobExtension != null)
             {
-                JobExtension jobExtension = JobsExtensions.FirstOrDefault(j => j.JobID == viewModelToSave.CurrentJobExtension.JobID);
-                if (jobExtension == null)
+                if (viewModelToSave.CurrentJobExtension.JobID != 0)
                 {
-                    SaveJobExtension(viewModelToSave.CurrentJobExtension);
-                }
-                else
-                {
-                    viewModelToSave.CurrentJobExtension.JobExtensionID = jobExtension.JobExtensionID;
-                    SaveJobExtension(viewModelToSave.CurrentJobExtension);
+                    JobExtension jobExtension = JobsExtensions.FirstOrDefault(j => j.JobID == viewModelToSave.CurrentJobExtension.JobID);
+                    if (jobExtension == null)
+                    {
+                        SaveJobExtension(viewModelToSave.CurrentJobExtension);
+                    }
+                    else
+                    {
+                        viewModelToSave.CurrentJobExtension.JobExtensionID = jobExtension.JobExtensionID;
+                        SaveJobExtension(viewModelToSave.CurrentJobExtension);
+                    }
                 }
             }
             if (viewModelToSave.CurrentHydroSpecific != null)

@@ -42,10 +42,8 @@
         </div>
         <div><span asp-validation-for="CurrentIndicator.CarPIType" class="text-danger"></span></div>
         <indicators select-for="PIDriver" selected-value="@Model.CurrentIndicator.CarPIType" asp-for="CurrentIndicator.CarPIType" class="form-control col-sm-4"></indicators>
-        <div><span asp-validation-for="CurrentIndicator.CarPIDiscreteVoltage" class="text-danger"></span></div>
-        <indicators select-for="Volts_Value" selected-value="@Model.CurrentIndicator.CarPIDiscreteVoltage" asp-for="CurrentIndicator.CarPIDiscreteVoltage" class="form-control col-sm-4"></indicators>
-        <div><span asp-validation-for="CurrentIndicator.HallCallsVoltageType " class="text-danger"></span></div>
-        <indicators select-for="Volts_Type" selected-value="@Model.CurrentIndicator.CarPIDiscreteVoltageType" asp-for="CurrentIndicator.CarPIDiscreteVoltageType" class="form-control col-sm-4"></indicators>
+        <div><span asp-validation-for="CurrentIndicator.CarPIDiscreteType" class="text-danger"></span></div>
+        <indicators select-for="CarPIDiscreteType" selected-value="@Model.CurrentIndicator.CarPIDiscreteType" asp-for="CurrentIndicator.CarPIDiscreteType" class="form-control col-sm-4"></indicators>
     </div>
     <div class="input-group col-5 text-center" style="padding-bottom:5px">
         <div class="input-group-prepend">
@@ -57,10 +55,8 @@
         </div>
         <div><span asp-validation-for="CurrentIndicator.HallPIType" class="text-danger"></span></div>
         <indicators select-for="PIDriver" selected-value="@Model.CurrentIndicator.HallPIType" asp-for="CurrentIndicator.HallPIType" class="form-control col-sm-4"></indicators>
-        <div><span asp-validation-for="CurrentIndicator.HallPIDiscreteVoltage" class="text-danger"></span></div>
-        <indicators select-for="Volts_Value" selected-value="@Model.CurrentIndicator.HallPIDiscreteVoltage" asp-for="CurrentIndicator.HallPIDiscreteVoltage" class="form-control col-sm-4"></indicators>
-        <div><span asp-validation-for="CurrentIndicator.HallCallsVoltageType " class="text-danger"></span></div>
-        <indicators select-for="Volts_Type" selected-value="@Model.CurrentIndicator.HallPIDiscreteVoltageType" asp-for="CurrentIndicator.HallPIDiscreteVoltageType" class="form-control col-sm-4"></indicators>
+        <div><span asp-validation-for="CurrentIndicator.HallPIDiscreteType" class="text-danger"></span></div>
+        <indicators select-for="CarPIDiscreteType" selected-value="@Model.CurrentIndicator.HallPIDiscreteType" asp-for="CurrentIndicator.HallPIDiscreteType" class="form-control col-sm-4"></indicators>
     </div>
     <div class="input-group col-5 text-center">
         <div class="input-group-prepend">
@@ -86,8 +82,10 @@
         <div class="input-group-text">
             <input asp-for="CurrentIndicator.CarLanterns" />
         </div>
-        <div><span asp-validation-for="CurrentIndicator.PassingFloorType" class="text-danger"></span></div>
-        <indicators select-for="PIDriver" selected-value="@Model.CurrentIndicator.PassingFloorType" asp-for="CurrentIndicator.PassingFloorType" class="form-control col-sm-4"></indicators>
+        <div><span asp-validation-for="CurrentIndicator.CarLanternsStyle" class="text-danger"></span></div>
+        <indicators select-for="PIDriver" selected-value="@Model.CurrentIndicator.CarLanternsStyle" asp-for="CurrentIndicator.CarLanternsStyle" class="form-control col-sm-4"></indicators>
+        <div><span asp-validation-for="CurrentIndicator.CarLanternsType" class="text-danger"></span></div>
+        <indicators select-for="PIType" selected-value="@Model.CurrentIndicator.CarLanternsType" asp-for="CurrentIndicator.CarLanternsType" class="form-control col-sm-4"></indicators>
     </div>
     <div class="input-group col-5 text-center" style="padding-bottom:5px">
         <div class="input-group-prepend">
@@ -97,22 +95,8 @@
         <div class="input-group-text">
             <input asp-for="CurrentIndicator.HallLanterns" />
         </div>
-        <div><span asp-validation-for="CurrentIndicator.PassingFloorType" class="text-danger"></span></div>
-        <indicators select-for="PIDriver" selected-value="@Model.CurrentIndicator.PassingFloorType" asp-for="CurrentIndicator.PassingFloorType" class="form-control col-sm-4"></indicators>
-    </div>
-    <div class="input-group col-5 text-center" style="padding-bottom:5px" id="discrete-car-lanterns">
-        <div><span asp-validation-for="CurrentIndicator.CarLanternsVoltage" class="text-danger"></span></div>
-        <indicators select-for="Volts_Value" selected-value="@Model.CurrentIndicator.CarLanternsVoltage" asp-for="CurrentIndicator.CarLanternsVoltage" class="form-control col-sm-4"></indicators>
-        <div><span asp-validation-for="CurrentIndicator.CarLanternsVoltageType" class="text-danger"></span></div>
-        <indicators select-for="Volts_Type" selected-value="@Model.CurrentIndicator.CarLanternsVoltageType" asp-for="CurrentIndicator.CarLanternsVoltageType" class="form-control col-sm-4"></indicators>
-        <div><span asp-validation-for="CurrentIndicator.CarLanternsType" class="text-danger"></span></div>
-        <indicators select-for="PIType" selected-value="@Model.CurrentIndicator.CarLanternsType" asp-for="CurrentIndicator.CarLanternsType" class="form-control col-sm-4"></indicators>
-    </div>
-    <div class="input-group col-5 text-center" style="padding-bottom:5px" id="discrete-hall-lanterns">
-        <div><span asp-validation-for="CurrentIndicator.HallLanternsVoltage" class="text-danger"></span></div>
-        <indicators select-for="Volts_Value" selected-value="@Model.CurrentIndicator.HallLanternsVoltage" asp-for="CurrentIndicator.HallLanternsVoltage" class="form-control col-sm-4"></indicators>
-        <div><span asp-validation-for="CurrentIndicator.HallLanternsVoltageType" class="text-danger"></span></div>
-        <indicators select-for="Volts_Type" selected-value="@Model.CurrentIndicator.HallLanternsVoltageType" asp-for="CurrentIndicator.HallLanternsVoltageType" class="form-control col-sm-4"></indicators>
+        <div><span asp-validation-for="CurrentIndicator.HallLanternsStyle" class="text-danger"></span></div>
+        <indicators select-for="PIDriver" selected-value="@Model.CurrentIndicator.HallLanternsStyle" asp-for="CurrentIndicator.HallLanternsStyle" class="form-control col-sm-4"></indicators>
         <div><span asp-validation-for="CurrentIndicator.HallLanternsType" class="text-danger"></span></div>
         <indicators select-for="PIType" selected-value="@Model.CurrentIndicator.HallLanternsType" asp-for="CurrentIndicator.HallLanternsType" class="form-control col-sm-4"></indicators>
     </div>
@@ -126,20 +110,14 @@
         </div>
         <div><span asp-validation-for="CurrentIndicator.PassingFloorType" class="text-danger"></span></div>
         <indicators select-for="PIDriver" selected-value="@Model.CurrentIndicator.PassingFloorType" asp-for="CurrentIndicator.PassingFloorType" class="form-control col-sm-4"></indicators>
+        <div><span asp-validation-for="CurrentIndicator.PassingFloorDiscreteType" class="text-danger"></span></div>
+        <indicators select-for="PIType" selected-value="@Model.CurrentIndicator.PassingFloorDiscreteType" asp-for="CurrentIndicator.PassingFloorDiscreteType" class="form-control col-sm-2"></indicators>
         <div class="input-group-prepend">
             <span class="input-group-text" id="">Passing Floor Enable</span>
         </div>
         <div class="input-group-text">
             <input asp-for="CurrentIndicator.PassingFloorEnable" />
         </div>
-    </div>
-    <div class="input-group col-10 text-left" style="padding-bottom:5px" id="discrete-hall-lanterns">
-        <div><span asp-validation-for="CurrentIndicator.PassingFloorDiscreteVoltage" class="text-danger"></span></div>
-        <indicators select-for="Volts_Value" selected-value="@Model.CurrentIndicator.PassingFloorDiscreteVoltage" asp-for="CurrentIndicator.PassingFloorDiscreteVoltage" class="form-control col-sm-2"></indicators>
-        <div><span asp-validation-for="CurrentIndicator.PassingFloorDiscreteVoltageType" class="text-danger"></span></div>
-        <indicators select-for="Volts_Type" selected-value="@Model.CurrentIndicator.PassingFloorDiscreteVoltageType" asp-for="CurrentIndicator.PassingFloorDiscreteVoltageType" class="form-control col-sm-2"></indicators>
-        <div><span asp-validation-for="CurrentIndicator.PassingFloorDiscreteType" class="text-danger"></span></div>
-        <indicators select-for="PIType" selected-value="@Model.CurrentIndicator.PassingFloorDiscreteType" asp-for="CurrentIndicator.PassingFloorDiscreteType" class="form-control col-sm-2"></indicators>
     </div>
 </div>
 <h2 class="col-sm-10">

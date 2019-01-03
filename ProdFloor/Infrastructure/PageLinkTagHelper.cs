@@ -389,10 +389,26 @@ namespace ProdFloor.Infrastructure
                     return new List<string> { "AC", "DC" }.AsQueryable();
                 case "CallType":
                     return new List<string> { "LED", "Incandescent" }.AsQueryable();
+                case "EPContact":
+                    return new List<string> { "NO", "NC" }.AsQueryable();
+                case "EPCars":
+                    return new List<string> { "1","2","3","4+" }.AsQueryable();
                 case "PIDriver":
-                    return new List<string> { "CE Electronics", "Emotive", "Discrete" }.AsQueryable();
+                    return new List<string> { "CE Electronics", "Emotive", "Discrete"}.AsQueryable();
+                case "CarPIDiscreteType":
+                    return new List<string> { "Multi-light", "One line per floor", "Binary 00" , "Binary 01" }.AsQueryable();
+                case "Monitoring":
+                    return new List<string> { "MView Complete", "MView Interface", "IMonitor Complete", "IMonitor Interface", "IDS Liftnet" }.AsQueryable();
                 case "PIType":
                     return new List<string> { "Chime", "Gong" }.AsQueryable();
+                case "AccessSWLocation":
+                    return new List<string> { "Front", "Rear" }.AsQueryable();
+                case "INCPButtons":
+                    return new List<string> { "Using top/bottom car calls", "Using up/down buttons" }.AsQueryable();
+                case "JobType":
+                    return new List<string> { "Simplex", "Duplex", "Group" }.AsQueryable();
+                case "JobType2":
+                    return new List<string> { "Selective Collective", "Duplex Selective Collective", "Group Operation" }.AsQueryable();
                 default:
                     return new List<string> { "Chime", "Gong" }.AsQueryable();
             }

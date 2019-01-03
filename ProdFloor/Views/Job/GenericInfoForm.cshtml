@@ -24,6 +24,21 @@
         <input asp-for="CurrentGenericFeatures.EQ" class="form-control " />
     </div>
     <div class="form-group col-3 text-center">
+        <label asp-for="CurrentGenericFeatures.CTINSPST" class="col-form-label"></label>
+        <div><span asp-validation-for="CurrentGenericFeatures.CTINSPST" class="text-danger"></span></div>
+        <input asp-for="CurrentGenericFeatures.CTINSPST" class="form-control " />
+    </div>
+    <div class="form-group col-3 text-center">
+        <label asp-for="CurrentGenericFeatures.Roped" class="col-form-label"></label>
+        <div><span asp-validation-for="CurrentGenericFeatures.Roped" class="text-danger"></span></div>
+        <input asp-for="CurrentGenericFeatures.Roped" class="form-control " />
+    </div>
+    <div class="form-group col-3 text-center">
+        <label asp-for="CurrentGenericFeatures.GovModel" class="col-form-label"></label>
+        <div><span asp-validation-for="CurrentGenericFeatures.GovModel" class="text-danger"></span></div>
+        <input asp-for="CurrentGenericFeatures.GovModel" class="form-control " />
+    </div>
+    <div class="form-group col-3 text-center">
         <label asp-for="CurrentGenericFeatures.EMT" class="col-form-label"></label>
         <div><span asp-validation-for="CurrentGenericFeatures.EMT" class="text-danger"></span></div>
         <input asp-for="CurrentGenericFeatures.EMT" class="form-control" />
@@ -32,6 +47,36 @@
         <label asp-for="CurrentGenericFeatures.EP" class="col-form-label"></label>
         <div><span asp-validation-for="CurrentGenericFeatures.EP" class="text-danger"></span></div>
         <input asp-for="CurrentGenericFeatures.EP" class="form-control" />
+    </div>
+    <div class="form-group col-3 text-center">
+        <label asp-for="CurrentGenericFeatures.EPVoltage" class="col-form-label"></label>
+        <div><span asp-validation-for="CurrentGenericFeatures.EPVoltage" class="text-danger"></span></div>
+        <input asp-for="CurrentGenericFeatures.EPVoltage" class="form-control" />
+    </div>
+    <div class="form-group col-3 text-center">
+        <label asp-for="CurrentGenericFeatures.EPOtherCars" class="col-form-label"></label>
+        <div><span asp-validation-for="CurrentGenericFeatures.EPOtherCars" class="text-danger"></span></div>
+        <input asp-for="CurrentGenericFeatures.EPOtherCars" class="form-control" />
+    </div>
+    <div class="form-group col-3 text-center">
+        <label asp-for="CurrentGenericFeatures.EPCarsNumber" class="col-form-label"></label>
+        <div><span asp-validation-for="CurrentGenericFeatures.EPCarsNumber" class="text-danger"></span></div>
+        <indicators select-for="EPCars" selected-value="@Model.CurrentGenericFeatures.EPCarsNumber" asp-for="CurrentGenericFeatures.EPCarsNumber"></indicators>
+    </div>
+    <div class="form-group col-3 text-center">
+        <label asp-for="CurrentGenericFeatures.EPContact" class="col-form-label"></label>
+        <div><span asp-validation-for="CurrentGenericFeatures.EPContact" class="text-danger"></span></div>
+        <indicators select-for="EPContact" selected-value="@Model.CurrentGenericFeatures.EPContact" asp-for="CurrentGenericFeatures.EPContact"></indicators>
+    </div>
+    <div class="form-group col-3 text-center">
+        <label asp-for="CurrentGenericFeatures.PTI" class="col-form-label"></label>
+        <div><span asp-validation-for="CurrentGenericFeatures.PTI" class="text-danger"></span></div>
+        <input asp-for="CurrentGenericFeatures.PTI" class="form-control" />
+    </div>
+    <div class="form-group col-3 text-center">
+        <label asp-for="CurrentGenericFeatures.EPSelect" class="col-form-label"></label>
+        <div><span asp-validation-for="CurrentGenericFeatures.EPSelect" class="text-danger"></span></div>
+        <input asp-for="CurrentGenericFeatures.EPSelect" class="form-control" />
     </div>
     <div class="form-group col-3 text-center">
         <label asp-for="CurrentGenericFeatures.FLO" class="col-form-label"></label>
@@ -59,9 +104,34 @@
         <input asp-for="CurrentGenericFeatures.INA" class="form-control" />
     </div>
     <div class="form-group col-3 text-center">
+        <label asp-for="CurrentGenericFeatures.TopAccess" class="col-form-label"></label>
+        <div><span asp-validation-for="CurrentGenericFeatures.TopAccess" class="text-danger"></span></div>
+        <input asp-for="CurrentGenericFeatures.TopAccess" class="form-control" />
+    </div>
+    <div class="form-group col-3 text-center">
+        <label asp-for="CurrentGenericFeatures.TopAccessLocation" class="col-form-label"></label>
+        <div><span asp-validation-for="CurrentGenericFeatures.TopAccessLocation" class="text-danger"></span></div>
+        <indicators select-for="AccessSWLocation" selected-value="@Model.CurrentGenericFeatures.TopAccessLocation" asp-for="CurrentGenericFeatures.TopAccessLocation"></indicators>
+    </div>
+    <div class="form-group col-3 text-center">
+        <label asp-for="CurrentGenericFeatures.BottomAccess" class="col-form-label"></label>
+        <div><span asp-validation-for="CurrentGenericFeatures.BottomAccess" class="text-danger"></span></div>
+        <input asp-for="CurrentGenericFeatures.BottomAccess" class="form-control" />
+    </div>
+    <div class="form-group col-3 text-center">
+        <label asp-for="CurrentGenericFeatures.BottomAccessLocation" class="col-form-label"></label>
+        <div><span asp-validation-for="CurrentGenericFeatures.BottomAccessLocation" class="text-danger"></span></div>
+        <indicators select-for="AccessSWLocation" selected-value="@Model.CurrentGenericFeatures.BottomAccessLocation" asp-for="CurrentGenericFeatures.BottomAccessLocation"></indicators>
+    </div>
+    <div class="form-group col-3 text-center">
         <label asp-for="CurrentGenericFeatures.INCP" class="col-form-label"></label>
         <div><span asp-validation-for="CurrentGenericFeatures.INCP" class="text-danger"></span></div>
         <input asp-for="CurrentGenericFeatures.INCP" class="form-control" />
+    </div>
+    <div class="form-group col-3 text-center">
+        <label asp-for="CurrentGenericFeatures.INCPButtons" class="col-form-label"></label>
+        <div><span asp-validation-for="CurrentGenericFeatures.INCPButtons" class="text-danger"></span></div>
+        <indicators select-for="INCPButtons" selected-value="@Model.CurrentGenericFeatures.INCPButtons" asp-for="CurrentGenericFeatures.INCPButtons"></indicators>
     </div>
     <div class="form-group col-3 text-center">
         <label asp-for="CurrentGenericFeatures.SwitchStyle" class="col-form-label"></label>
@@ -69,19 +139,9 @@
         <custom-select select-for="SwitchStyle" selected-value="@Model.CurrentGenericFeatures.SwitchStyle" asp-for="CurrentGenericFeatures.SwitchStyle"></custom-select>
     </div>
     <div class="form-group col-3 text-center">
-        <label asp-for="CurrentGenericFeatures.MView" class="col-form-label"></label>
-        <div><span asp-validation-for="CurrentGenericFeatures.MView" class="text-danger"></span></div>
-        <input asp-for="CurrentGenericFeatures.MView" class="form-control" />
-    </div>
-    <div class="form-group col-3 text-center">
-        <label asp-for="CurrentGenericFeatures.IMon" class="col-form-label"></label>
-        <div><span asp-validation-for="CurrentGenericFeatures.IMon" class="text-danger"></span></div>
-        <input asp-for="CurrentGenericFeatures.IMon" class="form-control" />
-    </div>
-    <div class="form-group col-3 text-center">
-        <label asp-for="CurrentGenericFeatures.IDS" class="col-form-label"></label>
-        <div><span asp-validation-for="CurrentGenericFeatures.IDS" class="text-danger"></span></div>
-        <input asp-for="CurrentGenericFeatures.IDS" class="form-control" />
+        <label asp-for="CurrentGenericFeatures.Monitoring" class="col-form-label"></label>
+        <div><span asp-validation-for="CurrentGenericFeatures.Monitoring" class="text-danger"></span></div>
+        <indicators select-for="Monitoring" selected-value="@Model.CurrentGenericFeatures.Monitoring" asp-for="CurrentGenericFeatures.Monitoring"></indicators>
     </div>
     <div class="form-group col-3 text-center">
         <label asp-for="CurrentGenericFeatures.CallEnable" class="col-form-label"></label>

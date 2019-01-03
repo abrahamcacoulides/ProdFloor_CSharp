@@ -6,14 +6,30 @@
             <span class="badge badge-pill badge-primary" style="float:right">
                 <small>@Model.JobNum</small>
             </span>
+            <span class="badge badge-pill badge-secondary" style="float:right">
+                <small>@Model.Status</small>
+            </span>
+            <span class="badge badge-pill badge-secondary" style="float:right">
+                <small>@Model.EngID</small>
+            </span>
         </h4>
     </div>
     <div class="card-text p-1">
         <form asp-action="Delete" method="post">
+            @if(Model.Status != "Incomplete")
+            { 
             <a asp-action="Edit" class="btn btn-sm btn-warning"
                asp-route-Id="@Model.JobID">
                 Edit
             </a>
+            }
+            else
+            {
+            <a asp-action="Continue" class="btn btn-sm btn-warning"
+               asp-route-Id="@Model.JobID">
+                Continue
+            </a>
+            }
             <input type="hidden" name="ID" value="@Model.JobID" />
             <button type="submit" class="btn btn-danger btn-sm">
                 Delete

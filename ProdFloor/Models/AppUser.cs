@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProdFloor.Models
 {
     public class AppUser : IdentityUser
     {
-        // no additional members are required
-        // for basic Identity installation
+        [Display(Name = "Engineer Number(only if required)")]
+        public int EngID { get; set; }
     }
 }

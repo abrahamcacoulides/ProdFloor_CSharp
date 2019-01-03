@@ -1,5 +1,7 @@
 ﻿@model JobViewModel
 <input type="hidden" asp-for="CurrentJob.JobID" />
+<input type="hidden" asp-for="CurrentJob.Status" />
+<input type="hidden" asp-for="CurrentJob.EngID" />
 <div class="form-group row">
     <label asp-for="CurrentJob.Name" class="col-sm-2 col-form-label"></label>
     <div><span asp-validation-for="CurrentJob.Name" class="text-danger"></span></div>
@@ -7,12 +9,14 @@
 </div>
 <div class="form-group row">
     <label asp-for="CurrentJob.JobNum" class="col-sm-2 col-form-label"></label>
-    <div><span asp-validation-for="CurrentJob.JobNum" class="text-danger"></span></div>
-    <input asp-for="CurrentJob.JobNum" class="form-control col-sm-7" />
+    <div>
+        <input asp-for="CurrentJob.JobNum" class="form-control" style="width:auto" />
+        <span asp-validation-for="CurrentJob.JobNum" class="text-danger"></span>
+    </div>
 </div>
 <div class="form-group row">
     <label asp-for="CurrentJob.JobType" class="col-sm-2 col-form-label"></label>
-    <div><span asp-validation-for="CurrentJob.JobType" class="text-danger"></span></div>
+    <div class="text-danger"><span asp-validation-for="CurrentJob.JobType"></span></div>
     <custom-select select-for="JobType" asp-for="CurrentJob.JobType" selected-value="@Model.CurrentJob.JobType"></custom-select>
 </div>
 <div class="form-group row">

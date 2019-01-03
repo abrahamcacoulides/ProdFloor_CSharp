@@ -98,7 +98,8 @@ namespace ProdFloor.Controllers
                 AppUser user = new AppUser
                 {
                     UserName = model.Name,
-                    Email = model.Email
+                    Email = model.Email,
+                    EngID = model.EngineerID
                 };
                 IdentityResult result
                 = await userManager.CreateAsync(user, model.Password);
@@ -163,11 +164,12 @@ namespace ProdFloor.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Edit(string id, string email,
-            string password)
+            string password, int EngID)
         {
             AppUser user = await userManager.FindByIdAsync(id);
             if (user != null)
             {
+                user.EngID = EngID;
                 user.Email = email;
                 IdentityResult validEmail
                 = await userValidator.ValidateAsync(userManager, user);

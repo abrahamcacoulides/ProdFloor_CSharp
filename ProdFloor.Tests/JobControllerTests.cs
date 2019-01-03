@@ -156,5 +156,18 @@ namespace ProdFloor.Tests
             // Act - try to save the Job
             IActionResult result = target.Edit(Job.JobID);
         }
+
+        [Fact]
+        public void Can_Delete()
+        { }
+
+        [Fact]
+        public void Can_Continue()
+        { }
+
+        [Fact]
+        public void Can_Create_Job()
+        { }
+
     }
 }
