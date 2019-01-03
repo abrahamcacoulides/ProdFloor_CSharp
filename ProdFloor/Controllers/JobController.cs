@@ -61,6 +61,12 @@ namespace ProdFloor.Controllers
             return RedirectToAction("List");
         }
 
+        public IActionResult Delete()
+        {
+            TempData["message"] = $"The requested Job Id doesn't exist";
+            return RedirectToAction("List");
+        }
+
         public ViewResult NewJob() => View(new Job());
 
         [HttpPost]
@@ -241,6 +247,8 @@ namespace ProdFloor.Controllers
             }
             else
             {
+                nextViewModel.CurrentJob = (nextViewModel.CurrentJob ?? new Job());
+                nextViewModel.CurrentJobExtension = (nextViewModel.CurrentJobExtension ?? new JobExtension());
                 nextViewModel.CurrentHydroSpecific = (nextViewModel.CurrentHydroSpecific ?? new HydroSpecific());
                 nextViewModel.CurrentGenericFeatures = (nextViewModel.CurrentGenericFeatures ?? new GenericFeatures());
                 nextViewModel.CurrentIndicator = (nextViewModel.CurrentIndicator ?? new Indicator());

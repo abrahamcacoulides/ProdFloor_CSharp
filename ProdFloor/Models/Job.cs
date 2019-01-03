@@ -21,11 +21,12 @@ namespace ProdFloor.Models
         public string JobType { get; set; }
 
         [Display(Name = "Job #")]
+        [Range(2015000000, 2021000000, ErrorMessage = "Job number is out of range")]
         [Required(ErrorMessage = "Please enter a Job Num")]
         public int JobNum { get; set; }
 
         [Display(Name = "PO #")]
-        [Range(3000000, 4900000, ErrorMessage = "Job number is out of range")]
+        [Range(3000000, 4900000, ErrorMessage = "PO number is out of range")]
         [Required(ErrorMessage = "Please enter a PO")]
         public int PO { get; set; }
 
