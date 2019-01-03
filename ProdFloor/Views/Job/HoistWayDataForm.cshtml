@@ -3,28 +3,38 @@
 <input type="hidden" asp-for="CurrentHoistWayData.HoistWayDataID" />
 <div class="form-group row has-warning has-feedback">
     <label asp-for="CurrentHoistWayData.Capacity" class="col-sm-2 col-form-label"></label>
-    <div><span asp-validation-for="CurrentHoistWayData.Capacity" class="text-danger"></span></div>
-    <input asp-for="CurrentHoistWayData.Capacity" class="form-control col-sm-7" />
+    <div>
+        <input asp-for="CurrentHoistWayData.Capacity" class="form-control col-sm-7" />
+        <span asp-validation-for="CurrentHoistWayData.Capacity" class="text-danger"></span>
+    </div>
 </div>
 <div class="form-group row has-warning has-feedback">
     <label asp-for="CurrentHoistWayData.UpSpeed" class="col-sm-2 col-form-label"></label>
-    <div><span asp-validation-for="CurrentHoistWayData.UpSpeed" class="text-danger"></span></div>
-    <input asp-for="CurrentHoistWayData.UpSpeed" class="form-control col-sm-7" />
+    <div>
+        <input asp-for="CurrentHoistWayData.UpSpeed" class="form-control col-sm-7" />
+        <span asp-validation-for="CurrentHoistWayData.UpSpeed" class="text-danger"></span>
+    </div>
 </div>
 <div class="form-group row has-warning has-feedback">
     <label asp-for="CurrentHoistWayData.DownSpeed" class="col-sm-2 col-form-label"></label>
-    <div><span asp-validation-for="CurrentHoistWayData.DownSpeed" class="text-danger"></span></div>
-    <input asp-for="CurrentHoistWayData.DownSpeed" class="form-control col-sm-7" />
+    <div>
+        <input asp-for="CurrentHoistWayData.DownSpeed" class="form-control col-sm-7" />
+        <span asp-validation-for="CurrentHoistWayData.DownSpeed" class="text-danger"></span>
+    </div>
 </div>
 <div class="form-group row has-warning has-feedback">
     <label asp-for="CurrentHoistWayData.TotalTravel" class="col-sm-2 col-form-label"></label>
-    <div><span asp-validation-for="CurrentHoistWayData.TotalTravel" class="text-danger"></span></div>
-    <input asp-for="CurrentHoistWayData.TotalTravel" class="form-control col-sm-7" />
+    <div>
+        <input asp-for="CurrentHoistWayData.TotalTravel" class="form-control col-sm-7" />
+        <span asp-validation-for="CurrentHoistWayData.TotalTravel" class="text-danger"></span>
+    </div>
 </div>
 <div class="form-group row has-warning has-feedback">
     <label asp-for="CurrentHoistWayData.LandingSystem" class="col-sm-2 col-form-label"></label>
-    <div><span asp-validation-for="CurrentHoistWayData.LandingSystem" class="text-danger"></span></div>
-    <custom-select select-for="LandingSystems" asp-for="CurrentHoistWayData.LandingSystem" selected-value="@Model.CurrentHoistWayData.LandingSystem"></custom-select>
+    <div>
+        <custom-select select-for="LandingSystems" asp-for="CurrentHoistWayData.LandingSystem" selected-value="@Model.CurrentHoistWayData.LandingSystem"></custom-select>
+        <span asp-validation-for="CurrentHoistWayData.LandingSystem" class="text-danger"></span>
+    </div>
 </div>
 <center></center>
 <table class="table table-bordered form-group" style="width:250px">

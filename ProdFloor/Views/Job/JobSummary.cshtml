@@ -15,7 +15,7 @@
         </h4>
     </div>
     <div class="card-text p-1">
-        <form asp-action="Delete" method="post">
+        <form asp-action="Delete" method="post" asp-route-Id="@Model.JobID">
             @if(Model.Status != "Incomplete")
             { 
             <a asp-action="Edit" class="btn btn-sm btn-warning"

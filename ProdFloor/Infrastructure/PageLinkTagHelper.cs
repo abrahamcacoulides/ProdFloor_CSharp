@@ -432,6 +432,7 @@ namespace ProdFloor.Infrastructure
                 output.Attributes.Add("name", name);
             }
             TagBuilder m_tag = new TagBuilder("option");
+            m_tag.Attributes["value"] = "";
             m_tag.InnerHtml.Append("---");
             result.InnerHtml.AppendHtml(m_tag);
             IQueryable<string> options = CaseFor(SelectFor);
