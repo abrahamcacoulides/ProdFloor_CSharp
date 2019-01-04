@@ -8,6 +8,7 @@ using ProdFloor.Models;
 using ProdFloor.Models.ViewModels;
 using Xunit;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Identity;
 
 namespace ProdFloor.Tests
 {
@@ -19,6 +20,12 @@ namespace ProdFloor.Tests
             // Arrange
             Mock<IJobRepository> mock = new Mock<IJobRepository>();
             Mock<IItemRepository> mockitems = new Mock<IItemRepository>();
+            List<AppUser> _users = new List<AppUser>
+            {
+                new AppUser{ EngID = 1 },
+                new AppUser{ EngID = 2 }
+            };
+            Mock<UserManager<AppUser>> mockusers = MockUserManager<AppUser>(_users);
             mock.Setup(m => m.Jobs).Returns((new Job[] {
                 new Job {JobID = 1, Name = "P1"},
                 new Job {JobID = 2, Name = "P2"},
@@ -27,7 +34,7 @@ namespace ProdFloor.Tests
                 new Job {JobID = 5, Name = "P5"}
             }).AsQueryable<Job>());
 
-            JobController controller = new JobController(mock.Object, mockitems.Object);
+            JobController controller = new JobController(mock.Object, mockitems.Object, mockusers.Object);
             controller.PageSize = 3;
 
             // Act
@@ -47,6 +54,12 @@ namespace ProdFloor.Tests
             // Arrange
             Mock<IJobRepository> mock = new Mock<IJobRepository>();
             Mock<IItemRepository> mockitems = new Mock<IItemRepository>();
+            List<AppUser> _users = new List<AppUser>
+            {
+                new AppUser{ EngID = 1 },
+                new AppUser{ EngID = 2 }
+            };
+            Mock<UserManager<AppUser>> mockusers = MockUserManager<AppUser>(_users);
             mock.Setup(m => m.Jobs).Returns((new Job[] {
                 new Job {JobID = 1, Name = "P1"},
                 new Job {JobID = 2, Name = "P2"},
@@ -57,7 +70,7 @@ namespace ProdFloor.Tests
 
             // Arrange
             JobController controller =
-            new JobController(mock.Object, mockitems.Object) { PageSize = 3 };
+            new JobController(mock.Object, mockitems.Object, mockusers.Object) { PageSize = 3 };
 
             // Act
             JobsListViewModel result =
@@ -78,6 +91,12 @@ namespace ProdFloor.Tests
             // - create the mock repository
             Mock<IJobRepository> mock = new Mock<IJobRepository>();
             Mock<IItemRepository> mockitems = new Mock<IItemRepository>();
+            List<AppUser> _users = new List<AppUser>
+            {
+                new AppUser{ EngID = 1 },
+                new AppUser{ EngID = 2 }
+            };
+            Mock<UserManager<AppUser>> mockusers = MockUserManager<AppUser>(_users);
             mock.Setup(m => m.Jobs).Returns((new Job[] {
                 new Job {JobID = 1, Name = "P1", JobType = "Cat1"},
                 new Job {JobID = 2, Name = "P2", JobType = "Cat2"},
@@ -87,7 +106,7 @@ namespace ProdFloor.Tests
             }).AsQueryable<Job>());
 
             // Arrange - create a controller and make the page size 3 items
-            JobController controller = new JobController(mock.Object, mockitems.Object);
+            JobController controller = new JobController(mock.Object, mockitems.Object, mockusers.Object);
             controller.PageSize = 3;
 
             // Action
@@ -107,6 +126,12 @@ namespace ProdFloor.Tests
             // Arrange
             Mock<IJobRepository> mock = new Mock<IJobRepository>();
             Mock<IItemRepository> mockitems = new Mock<IItemRepository>();
+            List<AppUser> _users = new List<AppUser>
+            {
+                new AppUser{ EngID = 1 },
+                new AppUser{ EngID = 2 }
+            };
+            Mock<UserManager<AppUser>> mockusers = MockUserManager<AppUser>(_users);
             mock.Setup(m => m.Jobs).Returns((new Job[] {
                 new Job {JobID = 1, Name = "P1", JobType = "Cat1"},
                 new Job {JobID = 2, Name = "P2", JobType = "Cat2"},
@@ -115,7 +140,7 @@ namespace ProdFloor.Tests
                 new Job {JobID = 5, Name = "P5", JobType = "Cat3"}
             }).AsQueryable<Job>());
 
-            JobController target = new JobController(mock.Object, mockitems.Object);
+            JobController target = new JobController(mock.Object, mockitems.Object, mockusers.Object);
             target.PageSize = 3;
 
             Func<ViewResult, JobsListViewModel> GetModel = result =>
@@ -140,12 +165,18 @@ namespace ProdFloor.Tests
             // Arrange - create mock repository
             Mock<IJobRepository> mock = new Mock<IJobRepository>();
             Mock<IItemRepository> mockitems = new Mock<IItemRepository>();
+            List<AppUser> _users = new List<AppUser>
+            {
+                new AppUser{ EngID = 1 },
+                new AppUser{ EngID = 2 }
+            };
+            Mock<UserManager<AppUser>> mockusers = MockUserManager<AppUser>(_users);
 
             // Arrange - create mock temp data
             Mock<ITempDataDictionary> tempData = new Mock<ITempDataDictionary>();
 
             // Arrange - create the controller
-            JobController target = new JobController(mock.Object, mockitems.Object)
+            JobController target = new JobController(mock.Object, mockitems.Object, mockusers.Object)
             {
                 TempData = tempData.Object
             };
@@ -168,6 +199,20 @@ namespace ProdFloor.Tests
         [Fact]
         public void Can_Create_Job()
         { }
+
+        public static Mock<UserManager<TUser>> MockUserManager<TUser>(List<TUser> ls) where TUser : class
+        {
+            var store = new Mock<IUserStore<TUser>>();
+            var mgr = new Mock<UserManager<TUser>>(store.Object, null, null, null, null, null, null, null, null);
+            mgr.Object.UserValidators.Add(new UserValidator<TUser>());
+            mgr.Object.PasswordValidators.Add(new PasswordValidator<TUser>());
+
+            mgr.Setup(x => x.DeleteAsync(It.IsAny<TUser>())).ReturnsAsync(IdentityResult.Success);
+            mgr.Setup(x => x.CreateAsync(It.IsAny<TUser>(), It.IsAny<string>())).ReturnsAsync(IdentityResult.Success).Callback<TUser, string>((x, y) => ls.Add(x));
+            mgr.Setup(x => x.UpdateAsync(It.IsAny<TUser>())).ReturnsAsync(IdentityResult.Success);
+
+            return mgr;
+        }
 
     }
 }
