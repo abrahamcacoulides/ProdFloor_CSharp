@@ -10,8 +10,10 @@ namespace ProdFloor.Models
     {
         public int LandingSystemID { get; set; }
 
+        [Required(ErrorMessage = "Please enter a Model")]
         public string UsedIn { get; set; }
 
+        [Required(ErrorMessage = "Please enter a name")]
         public string Name { get; set; }
     }
 }

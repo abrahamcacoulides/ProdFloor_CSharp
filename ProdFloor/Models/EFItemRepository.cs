@@ -15,17 +15,11 @@ namespace ProdFloor.Models
         }
 
         public IQueryable<Country> Countries => context.Countries;
-
         public IQueryable<State> States => context.States;
-        
         public IQueryable<City> Cities => context.Cities;
-        
         public IQueryable<DoorOperator> DoorOperators => context.DoorOperators;
-        
         public IQueryable<FireCode> FireCodes => context.FireCodes;
-        
         public IQueryable<JobType> JobTypes => context.JobTypes;
-        
         public IQueryable<LandingSystem> LandingSystems => context.LandingSystems;
 
         public void SaveCountry(Country country)
@@ -46,7 +40,6 @@ namespace ProdFloor.Models
             context.SaveChanges();
 
         }
-
         public void SaveState(State state)
         {
             if (state.StateID == 0)
@@ -65,7 +58,6 @@ namespace ProdFloor.Models
             }
             context.SaveChanges();
         }
-
         public void SaveCity(City city)
         {
             if (city.CityID == 0)
@@ -86,7 +78,6 @@ namespace ProdFloor.Models
             }
             context.SaveChanges();
         }
-
         public void SaveDoorOperator(DoorOperator doorOperator)
         {
             if (doorOperator.DoorOperatorID == 0)
@@ -106,7 +97,6 @@ namespace ProdFloor.Models
             }
             context.SaveChanges();
         }
-
         public void SaveFireCode(FireCode fireCode)
         {
             if (fireCode.FireCodeID == 0)
@@ -124,7 +114,6 @@ namespace ProdFloor.Models
             }
             context.SaveChanges();
         }
-
         public void SaveJobType(JobType jobType)
         {
             if (jobType.JobTypeID == 0)
@@ -142,7 +131,6 @@ namespace ProdFloor.Models
             }
             context.SaveChanges();
         }
-
         public void SaveLandingSystem(LandingSystem landingSystem)
         {
             if (landingSystem.LandingSystemID == 0)
@@ -161,7 +149,6 @@ namespace ProdFloor.Models
             }
             context.SaveChanges();
         }
-        
 
         public Country DeleteCountry(int CountryID)
         {
@@ -174,7 +161,6 @@ namespace ProdFloor.Models
             }
             return dbEntry;
         }
-
         public State DeleteState(int StateID)
         {
             State dbEntry = context.States
@@ -186,7 +172,6 @@ namespace ProdFloor.Models
             }
             return dbEntry;
         }
-
         public City DeleteCity(int CityID)
         {
             City dbEntry = context.Cities
@@ -198,7 +183,6 @@ namespace ProdFloor.Models
             }
             return dbEntry;
         }
-
         public DoorOperator DeleteDoorOperator(int DoorOperatorID)
         {
             DoorOperator dbEntry = context.DoorOperators
@@ -210,7 +194,6 @@ namespace ProdFloor.Models
             }
             return dbEntry;
         }
-
         public FireCode DeleteFireCode(int FireCodeID)
         {
             FireCode dbEntry = context.FireCodes
@@ -222,7 +205,6 @@ namespace ProdFloor.Models
             }
             return dbEntry;
         }
-
         public JobType DeleteJobType(int JobTypeID)
         {
             JobType dbEntry = context.JobTypes
@@ -234,7 +216,6 @@ namespace ProdFloor.Models
             }
             return dbEntry;
         }
-
         public LandingSystem DeleteLandingSystem(int LandingSystemID)
         {
             LandingSystem dbEntry = context.LandingSystems

@@ -34,7 +34,7 @@ namespace ProdFloor.Tests
                 new Job {JobID = 5, Name = "P5"}
             }).AsQueryable<Job>());
 
-            JobController controller = new JobController(mock.Object, mockitems.Object, mockusers.Object);
+            JobController controller = new JobController(mock.Object, mockusers.Object);
             controller.PageSize = 3;
 
             // Act
@@ -70,7 +70,7 @@ namespace ProdFloor.Tests
 
             // Arrange
             JobController controller =
-            new JobController(mock.Object, mockitems.Object, mockusers.Object) { PageSize = 3 };
+            new JobController(mock.Object, mockusers.Object) { PageSize = 3 };
 
             // Act
             JobsListViewModel result =
@@ -106,7 +106,7 @@ namespace ProdFloor.Tests
             }).AsQueryable<Job>());
 
             // Arrange - create a controller and make the page size 3 items
-            JobController controller = new JobController(mock.Object, mockitems.Object, mockusers.Object);
+            JobController controller = new JobController(mock.Object, mockusers.Object);
             controller.PageSize = 3;
 
             // Action
@@ -140,7 +140,7 @@ namespace ProdFloor.Tests
                 new Job {JobID = 5, Name = "P5", JobType = "Cat3"}
             }).AsQueryable<Job>());
 
-            JobController target = new JobController(mock.Object, mockitems.Object, mockusers.Object);
+            JobController target = new JobController(mock.Object, mockusers.Object);
             target.PageSize = 3;
 
             Func<ViewResult, JobsListViewModel> GetModel = result =>
@@ -176,7 +176,7 @@ namespace ProdFloor.Tests
             Mock<ITempDataDictionary> tempData = new Mock<ITempDataDictionary>();
 
             // Arrange - create the controller
-            JobController target = new JobController(mock.Object, mockitems.Object, mockusers.Object)
+            JobController target = new JobController(mock.Object, mockusers.Object)
             {
                 TempData = tempData.Object
             };

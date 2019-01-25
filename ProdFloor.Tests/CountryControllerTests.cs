@@ -39,6 +39,39 @@ namespace ProdFloor.Tests
             Assert.Equal("P2", result.Countries[1].Name);
             Assert.Equal("P3", result.Countries[2].Name);
         }
+        
+        [Fact]
+        public void Pagination_Properly_Working_Countries()
+        {
+            // Arrange - create the mock repository
+            Mock<IItemRepository> mock = new Mock<IItemRepository>();
+            mock.Setup(m => m.Countries).Returns(new Country[]
+            {
+                new Country {CountryID = 1, Name = "P1"},
+                new Country {CountryID = 2, Name = "P2"},
+                new Country {CountryID = 3, Name = "P3"},
+                new Country {CountryID = 4, Name = "PX"},
+                new Country {CountryID = 5, Name = "P4"},
+                new Country {CountryID = 6, Name = "P5"},
+            }.AsQueryable<Country>());
+
+            // Arrange - create a controller
+            CountryController target = new CountryController(mock.Object);
+
+            // Action
+            CountryListViewModel result = target.List(1).ViewData.Model as CountryListViewModel;//Request a List for the first page
+            CountryListViewModel result2 = target.List(2).ViewData.Model as CountryListViewModel;//Request a List for the second page
+
+            // Assert
+            Assert.Equal(4, result.Countries.Count());
+            Assert.Equal("P1", result.Countries[0].Name);
+            Assert.Equal("P2", result.Countries[1].Name);
+            Assert.Equal("P3", result.Countries[2].Name);
+            Assert.Equal("PX", result.Countries[3].Name);
+            Assert.Equal(2, result2.Countries.Count());
+            Assert.Equal("P4", result2.Countries[0].Name);
+            Assert.Equal("P5", result2.Countries[1].Name);
+        }
 
         [Fact]
         public void Can_Edit_Country()
@@ -61,6 +94,7 @@ namespace ProdFloor.Tests
             Country p3 = GetViewModel<Country>(target.Edit(3));
 
             // Assert
+            Assert.Equal("P1", p1.Name);
             Assert.Equal(1, p1.CountryID);
             Assert.Equal(2, p2.CountryID);
             Assert.Equal(3, p3.CountryID);
@@ -76,6 +110,7 @@ namespace ProdFloor.Tests
                 new Country {CountryID = 1, Name = "P1"},
                 new Country {CountryID = 2, Name = "P2"},
                 new Country {CountryID = 3, Name = "P3"},
+                new Country {CountryID = 5, Name = "P5"},
             }.AsQueryable<Country>());
 
             // Arrange - create the controller
@@ -138,96 +173,12 @@ namespace ProdFloor.Tests
             // called with the correct Country
             mock.Verify(m => m.DeleteCountry(prod.CountryID));
         }
-        
-        [Fact]
-        public void Can_Paginate()
-        {
-            // Arrange
-            Mock<IJobRepository> mock = new Mock<IJobRepository>();
-            mock.Setup(m => m.Jobs).Returns((new Job[] {
-                new Job {JobID = 1, Name = "P1"},
-                new Job {JobID = 2, Name = "P2"},
-                new Job {JobID = 3, Name = "P3"},
-                new Job {JobID = 4, Name = "P4"},
-                new Job {JobID = 5, Name = "P5"}
-            }).AsQueryable<Job>());
-            Mock<IItemRepository> mockitems = new Mock<IItemRepository>();
-            List<AppUser> _users = new List<AppUser>
-            {
-                new AppUser{ EngID = 1 },
-                new AppUser{ EngID = 2 }
-            };
-            Mock<UserManager<AppUser>> mockusers = MockUserManager<AppUser>(_users);
-            mockusers.Setup(u => u.Users).Returns((new AppUser[] {
-                new AppUser {EngID = 1},
-                new AppUser {EngID = 2},
-                new AppUser {EngID = 3},
-                new AppUser {EngID = 4},
-                new AppUser {EngID = 5}
-            }).AsQueryable<AppUser>());
-            JobController controller = new JobController(mock.Object, mockitems.Object, mockusers.Object);
-            controller.PageSize = 3;
-
-            // Act
-            JobsListViewModel result =
-            controller.List(null, 2).ViewData.Model as JobsListViewModel;
-
-            // Assert
-            Job[] prodArray = result.Jobs.ToArray();
-            Assert.True(prodArray.Length == 2);
-            Assert.Equal("P4", prodArray[0].Name);
-            Assert.Equal("P5", prodArray[1].Name);
-        }
-
-        [Fact]
-        public void Can_Send_Pagination_View_Model()
-        {
-            // Arrange
-            Mock<IJobRepository> mock = new Mock<IJobRepository>();
-            Mock<IItemRepository> mockitems = new Mock<IItemRepository>();
-            List<AppUser> _users = new List<AppUser>
-            {
-                new AppUser{ EngID = 1 },
-                new AppUser{ EngID = 2 }
-            };
-            Mock<UserManager<AppUser>> mockusers = MockUserManager<AppUser>(_users);
-            mock.Setup(m => m.Jobs).Returns((new Job[] {
-                new Job {JobID = 1, Name = "P1"},
-                new Job {JobID = 2, Name = "P2"},
-                new Job {JobID = 3, Name = "P3"},
-                new Job {JobID = 4, Name = "P4"},
-                new Job {JobID = 5, Name = "P5"}
-            }).AsQueryable<Job>());
-            mockusers.Setup(u => u.Users).Returns((new AppUser[] {
-                new AppUser {EngID = 1},
-                new AppUser {EngID = 2},
-                new AppUser {EngID = 3},
-                new AppUser {EngID = 4},
-                new AppUser {EngID = 5}
-            }).AsQueryable<AppUser>());
-
-            // Arrange
-            JobController controller =
-            new JobController(mock.Object, mockitems.Object, mockusers.Object) { PageSize = 3 };
-
-            // Act
-            JobsListViewModel result =
-            controller.List(null, 2).ViewData.Model as JobsListViewModel;
-
-            // Assert
-            PagingInfo pageInfo = result.PagingInfo;
-            Assert.Equal(2, pageInfo.CurrentPage);
-            Assert.Equal(3, pageInfo.ItemsPerPage);
-            Assert.Equal(5, pageInfo.TotalItems);
-            Assert.Equal(2, pageInfo.TotalPages);
-        }
 
         [Fact]
         public void Can_Save_Valid_Changes()
         {
             // Arrange - create mock repository
             Mock<IJobRepository> mock = new Mock<IJobRepository>();
-            Mock<IItemRepository> mockitems = new Mock<IItemRepository>();
             List<AppUser> _users = new List<AppUser>
             {
                 new AppUser{ EngID = 1 },
@@ -239,13 +190,13 @@ namespace ProdFloor.Tests
             Mock<ITempDataDictionary> tempData = new Mock<ITempDataDictionary>();
 
             // Arrange - create the controller
-            JobController target = new JobController(mock.Object, mockitems.Object, mockusers.Object)
+            JobController target = new JobController(mock.Object, mockusers.Object)
             {
                 TempData = tempData.Object
             };
 
             // Arrange - create a Job
-            Job Job = new Job { Name = "Test" };
+            Job Job = new Job { Name = "Test" };        
 
             // Act - try to save the Job
             IActionResult result = target.Edit(Job.JobID);
