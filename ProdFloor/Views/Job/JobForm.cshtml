@@ -73,7 +73,7 @@
 <div class="form-group row">
     <label asp-for="CurrentJob.JobCity" class="col-sm-2 col-form-label"></label>
     <div>
-        <custom-select select-for="City" selected-value="@Model.CurrentJob.JobCity" asp-for="CurrentJob.JobCity"></custom-select>
+        <location select-for="City" selected-value="@Model.CurrentJob.JobCity" asp-for="CurrentJob.JobCity"></location>
         <span asp-validation-for="CurrentJob.JobCity" class="text-danger"></span>
     </div>
 </div>

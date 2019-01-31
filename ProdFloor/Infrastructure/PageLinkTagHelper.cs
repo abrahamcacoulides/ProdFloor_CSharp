@@ -365,18 +365,15 @@ namespace ProdFloor.Infrastructure
 
     public class IndicatorsTagHelper : TagHelper
     {
-        private IItemRepository itemsrepository;
-
         private IUrlHelperFactory urlHelperFactory;
 
         public ModelExpression AspFor { get; set; }
 
         public string SelectFor { get; set; }
 
-        public IndicatorsTagHelper(IUrlHelperFactory helperFactory, IItemRepository itemsrepo)
+        public IndicatorsTagHelper(IUrlHelperFactory helperFactory)
         {
             urlHelperFactory = helperFactory;
-            itemsrepository = itemsrepo;
         }
 
         private IQueryable<string> CaseFor(string value)
@@ -445,6 +442,59 @@ namespace ProdFloor.Infrastructure
                     tag.Attributes["selected"] = "selected";
                 }
                 tag.InnerHtml.Append(option);
+                result.InnerHtml.AppendHtml(tag);
+            }
+            output.Content.AppendHtml(result.InnerHtml);
+        }
+    }
+
+    public class CityTagHelper : TagHelper
+    {
+        private IItemRepository itemsrepository;
+
+        private IUrlHelperFactory urlHelperFactory;
+
+        public ModelExpression AspFor { get; set; }
+
+        public string SelectFor { get; set; }
+
+        public CityTagHelper(IUrlHelperFactory helperFactory, IItemRepository itemsrepo)
+        {
+            urlHelperFactory = helperFactory;
+            itemsrepository = itemsrepo;
+        }
+
+        [ViewContext]
+        [HtmlAttributeNotBound]
+        public ViewContext ViewContext { get; set; }
+
+        public int SelectedValue { get; set; }
+
+        public override void Process(TagHelperContext context, TagHelperOutput output)
+        {
+            IUrlHelper urlHelper = urlHelperFactory.GetUrlHelper(ViewContext);
+            output.TagName = "select";
+            TagBuilder result = new TagBuilder("select");
+            string name = this.AspFor.Name;
+            if (!String.IsNullOrEmpty(name))
+            {
+                output.Attributes.Add("id", name);
+                output.Attributes.Add("name", name);
+            }
+            TagBuilder m_tag = new TagBuilder("option");
+            m_tag.Attributes["value"] = "";
+            m_tag.InnerHtml.Append("---");
+            result.InnerHtml.AppendHtml(m_tag);
+            IQueryable<City> cities = itemsrepository.Cities.Distinct();
+            foreach (City city in cities)
+            {
+                TagBuilder tag = new TagBuilder("option");
+                tag.Attributes["value"] = city.CityID.ToString();
+                if (city.CityID == SelectedValue)
+                {
+                    tag.Attributes["selected"] = "selected";
+                }
+                tag.InnerHtml.Append(city.Name);
                 result.InnerHtml.AppendHtml(tag);
             }
             output.Content.AppendHtml(result.InnerHtml);
